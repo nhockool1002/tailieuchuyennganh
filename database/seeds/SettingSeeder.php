@@ -29,17 +29,17 @@ class SettingSeeder extends Seeder
 
         DB::table('setting')->insert([
             'config_name' => 'backend_bottom_1',
-            'config_setting' => '<p><span style="color: #ff0000;"><strong><a style="color: #ff0000; text-decoration: none;" href="https://www.facebook.com/xshare.community">LogBox</a></strong></span></p>'
+            'config_setting' => '<p><span style="color: #ff0000;"><strong><a style="color: #ff0000; text-decoration: none;" href="https://www.facebook.com/tailieuchuyennganhmienphi">LogBox</a></strong></span></p>'
         ]);
 
         DB::table('setting')->insert([
             'config_name' => 'backend_bottom_2',
-            'config_setting' => '<p><span style="color: #ff6600;"><strong><a style="color: #ff6600; text-decoration: none;" href="https://www.facebook.com/xshare.community">NoteBox</a></strong></span></p>'
+            'config_setting' => '<p><span style="color: #ff6600;"><strong><a style="color: #ff6600; text-decoration: none;" href="https://www.facebook.com/tailieuchuyennganhmienphi">NoteBox</a></strong></span></p>'
         ]);
 
         DB::table('setting')->insert([
             'config_name' => 'backend_bottom_3',
-            'config_setting' => '<p><span style="color: #339966;"><strong><a style="color: #339966;text-decoration:none" href="https://www.facebook.com/xshare.community">FanPage XShare</a></strong></span></p>'
+            'config_setting' => '<p><span style="color: #339966;"><strong><a style="color: #339966;text-decoration:none" href="https://www.facebook.com/tailieuchuyennganhmienphi">FanPage XShare</a></strong></span></p>'
         ]);
 
         DB::table('setting')->insert([
@@ -61,7 +61,7 @@ class SettingSeeder extends Seeder
 
         DB::table('setting')->insert([
             'config_name' => 'frontend_footer_column_4',
-            'config_setting' => '{"title": "Contact","config":"<ul>\r\n<li><a href=\"mailto:xshare.community@gmail.com\">xshare.community@gmail.com<\/a><\/li>\r\n<li><a href=\"mailto:xshare.marketing.1@gmail.com\">xshare.marketing.1@gmail.com<\/a>&nbsp;<\/li>\r\n<\/ul>"}'
+            'config_setting' => '{"title": "Contact","config":"<ul>\r\n<li><a href=\"mailto:dulieuchuyennganh@gmail.com\">dulieuchuyennganh@gmail.com<\/a><\/li>\r\n<li><a href=\"mailto:xshare.marketing.1@gmail.com\">xshare.marketing.1@gmail.com<\/a>&nbsp;<\/li>\r\n<\/ul>"}'
         ]);
 
         DB::table('setting')->insert([

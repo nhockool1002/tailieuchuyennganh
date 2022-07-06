@@ -40,7 +40,7 @@
                                     @include('backend.link.tabcontent-service')
                                     @else
                                     <br />
-                                    <p class="text-danger">Bạn không đủ quyền hạn để khởi tạo Service Shorlink -  Vui lòng liên hệ Administrator <a href="mailto:xshare.community@gmail.com">[Tại đây]</a></p>
+                                    <p class="text-danger">Bạn không đủ quyền hạn để khởi tạo Service Shorlink -  Vui lòng liên hệ Administrator <a href="mailto:dulieuchuyennganh@gmail.com">[Tại đây]</a></p>
                                     @endif
                                 </div>
                                 <div id="Create" class="tabcontent">
