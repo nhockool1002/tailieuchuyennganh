@@ -15,7 +15,7 @@
     {!! $posts->post_content !!}
     <br />
     <div class="fshare-banner">
-    <a href="https://www.fshare.vn/partnerlink?key=f1xsharedatacom" style="width:100%"><img src="https://storage.fshare.vn/images/Xsharedata.com_728x90.gif" style="width:100%"></a>
+    <a href="#" style="width:100%"><img src="https://via.placeholder.com/728x90" style="width:100%"></a>
     </div>
     @include('frontend.post.spoiler')
     <hr />

@@ -23,7 +23,7 @@ class AdsSeeder extends Seeder
 
         factory(App\Ads::class)->create([
             'ads_zone' => 'bottom_post_728x90',
-            'ads_img' => 'https://uphinhnhanh.com/images/2018/10/31/ads-ngang.jpg',
+            'ads_img' => 'https://via.placeholder.com/728x90',
         ]);
 
         factory(App\Ads::class)->create([
@@ -36,7 +36,7 @@ class AdsSeeder extends Seeder
 
         factory(App\Ads::class)->create([
             'ads_zone' => 'category_top_content_728x90',
-            'ads_img' => 'https://uphinhnhanh.com/images/2018/10/31/ads-ngang.jpg',
+            'ads_img' => 'https://via.placeholder.com/728x90',
         ]);
 
     }

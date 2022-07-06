@@ -3,10 +3,10 @@
 					<div class="col-md-8">
 						<div class="row">
 						    <br />
-    <div class="fshare-banner" style="width:98%">
-    <a href="https://www.fshare.vn/partnerlink?key=f1xsharedatacom" style="width:98%"><img src="https://storage.fshare.vn/images/Xsharedata.com_728x90.gif" style="width:100%"></a>
-    </div>
-    <br />
+								<div class="fshare-banner" style="width:98%">
+								<a href="#" style="width:98%"><img src="https://via.placeholder.com/728x90" style="width:100%"></a>
+								</div>
+								<br />
 							@for($i = 0; $i < count($random7post); $i++)								
 							<!-- post -->
 							<div class="{{ $i == 0 ? 'col-md-12' : 'col-md-6' }}">

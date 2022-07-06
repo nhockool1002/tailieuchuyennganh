@@ -14,19 +14,19 @@
         @endif
 		
 
-		<meta name="description" content="XShare Community - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí." />
+		<meta name="description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí." />
 		<meta content='Tài nguyên miễn phí, tài liệu miễn phí, chia sẻ tài liệu' name='keywords'/>
 
 		<meta content='blogger' name='generator'/>
 
         <!-- Schema.org markup for Google+ -->
         <meta itemprop="name" content="@stack('postname') {{ \Constant::TITLE_NAME }}">
-        <meta itemprop="description" content="XShare Community - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí.">
-        <meta itemprop="image" content="https://tinyurl.com/yb9yenp8">
+        <meta itemprop="description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí.">
+        <meta itemprop="image" content="https://tailieuchuyennganh.com/img/banner1.jpg">
 
         <!-- Twitter Card data -->
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:site" content="XShare Community">
+        <meta name="twitter:site" content="Tài liệu chuyên ngành">
         @if (strpos(url()->current(), 'post'))
             <meta name="twitter:title" content="@stack('postname') {{ \Constant::TITLE_NAME }}">
         @elseif (strpos(url()->current(), 'category'))
@@ -34,9 +34,9 @@
         @else
             <meta name="twitter:title" content="{{ \Constant::TITLE_NAME }}">
         @endif
-        <meta name="twitter:description" content="XShare Community - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí.">
-        <meta name="twitter:creator" content="XShare Community">
-        <meta name="twitter:image:src" content="https://tinyurl.com/yb9yenp8">
+        <meta name="twitter:description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí.">
+        <meta name="twitter:creator" content="Tài liệu chuyên ngành">
+        <meta name="twitter:image:src" content="https://tailieuchuyennganh.com/img/banner1.jpg">
         <meta property="fb:admins" content="100002753472309"/>
         <meta property="fb:app_id" content="287055021963669"/>
         <!-- Open Graph data -->
@@ -53,10 +53,10 @@
         @if (strpos(url()->current(), 'post'))
 		<meta property="og:image" content="{{ \Constant::UPLOAD_PATH }}{{ $posts->post_img }}" />
         @else
-        <meta property="og:image" content="https://tinyurl.com/yb9yenp8" />
+        <meta property="og:image" content="https://tailieuchuyennganh.com/img/banner1.jpg" />
         @endif
-        <meta property="og:image:alt" content="XShare Community - Cộng đồng chia sẻ tài nguyên miễn phí" />
-        <meta property="og:description" content="XShare Community - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí." />
+        <meta property="og:image:alt" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí" />
+        <meta property="og:description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí." />
         <link rel="icon" type="image/png" href="{{ asset(\Constant::FAV_ICON_PATH) }}"/>
 		<!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Cuprum:400,400i,700,700i&amp;subset=vietnamese" rel="stylesheet">
