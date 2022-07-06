@@ -51,6 +51,7 @@ $config['privateDir'] = array(
 
 $config['images'] = array(
     'maxWidth'  => 1600,
+    'directAccess' => true,
     'maxHeight' => 1200,
     'quality'   => 80,
     'sizes' => array(
@@ -66,7 +67,7 @@ $config['images'] = array(
 $config['backends'][] = array(
     'name'         => 'default',
     'adapter'      => 'local',
-    'baseUrl'      => '/upload/posts',
+    'baseUrl'      => 'http://tailieuchuyennganh.com/public/upload/posts',
 //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
     'chmodFiles'   => 0777,
     'chmodFolders' => 0755,

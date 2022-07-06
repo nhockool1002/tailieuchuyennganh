@@ -8,8 +8,8 @@ class Constant
     const TITLE_NAME = 'Tài liệu chuyên ngành - Cộng đồng chia sẻ tài liệu miễn phí';
     const ADMIN_TITLE_NAME = 'Administrator Panel';
     const URL_HOME = 'https://tailieuchuyennganh.com/';
-    const UPLOAD_PATH = \Constant::URL_HOME.'upload/posts/images/';
-    const UPLOAD_PAGE_PATH = \Constant::URL_HOME.'upload/pages/images/';
+    const UPLOAD_PATH = \Constant::URL_HOME.'public/upload/posts/images/';
+    const UPLOAD_PAGE_PATH = \Constant::URL_HOME.'public/upload/pages/images/';
     const AVATAR_PATH = \Constant::URL_HOME.'upload/users/images/';
     const FAV_ICON_PATH = 'login-assets/images/avatar-01.jpg';
     const IMG_PATH = \Constant::URL_HOME.'img/';

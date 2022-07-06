@@ -14,7 +14,7 @@
 
 <p><span style="color:#27ae60"><span style="font-size:16px"><strong>Bước 1</strong></span></span>&nbsp;: Các bạn nhấn vào liên kết tải bên dưới, trang web hiện ra và các bạn làm như hình bên dươi.</p>
 
-<p style="text-align:center"><img alt="" src="https://xsharedata.com/img/hddl.gif"></p>
+<p style="text-align:center"><img alt="" src="https://tailieuchuyennganh.com/img/hddl.gif"></p>
 
 <p><span style="color:#27ae60"><span style="font-size:16px"><strong>Bước 2</strong></span></span>&nbsp;:&nbsp;Sau khi vượt qua bước trên các bạn sẽ được di chuyển tới trang&nbsp;<strong>download</strong>, các bạn lưu ý đây là trang tải về có tốc độ ngang với Google Drive,&nbsp;<strong>XShare&nbsp;</strong>xin đảm bảo sẽ không Popup hay bất kỳ quảng cáo khó chiệu nào xuất hiện . Các bạn làm như hình dưới.</p>
 
