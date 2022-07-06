@@ -17,7 +17,7 @@
     <div class="fshare-banner">
     <a href="#" style="width:100%"><img src="https://via.placeholder.com/728x90" style="width:100%"></a>
     </div>
-    @include('frontend.post.spoiler')
+    <!-- @include('frontend.post.spoiler') -->
     <hr />
     @if (!empty($linkdl))
     <div class="row">
