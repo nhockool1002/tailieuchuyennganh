@@ -3,10 +3,10 @@
 class Constant
 {
     // TITLE
-    const TITLE_NAME_TOP = 'XShare Community';
-    const LOGIN_PAGE_TITLE = 'XShare Community Login';
-    const TITLE_NAME = 'XShare - Cộng đồng chia sẻ tài liệu miễn phí';
-    const ADMIN_TITLE_NAME = 'XShare - Administrator Panel';
+    const TITLE_NAME_TOP = 'Tài liệu chuyên ngành';
+    const LOGIN_PAGE_TITLE = 'Tài liệu chuyên ngành Đăng nhập';
+    const TITLE_NAME = 'Tài liệu chuyên ngành - Cộng đồng chia sẻ tài liệu miễn phí';
+    const ADMIN_TITLE_NAME = 'Administrator Panel';
     const URL_HOME = 'https://tailieuchuyennganh.com/';
     const UPLOAD_PATH = \Constant::URL_HOME.'upload/posts/images/';
     const UPLOAD_PAGE_PATH = \Constant::URL_HOME.'upload/pages/images/';

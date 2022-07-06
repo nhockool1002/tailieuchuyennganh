@@ -37,7 +37,7 @@
 						<!-- nav -->
 						<ul class="nav-menu nav navbar-nav">
 							<li><a href="{{ route('home') }}">Trang chủ</a></li>
-							<li class="specmenu"><a href="{{ route('getDonatePage') }}">XSHARE Online</a></li>
+							<!-- <li class="specmenu"><a href="{{ route('getDonatePage') }}"></a></li> -->
 							@foreach($menus as $menu)
 							<li class="cat-{{ $menu->id }}"><a href="{{ $menu->menu_url }}">{{ $menu->menu_name }}</a></li>
 							@endforeach
