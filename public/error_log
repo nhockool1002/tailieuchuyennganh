@@ -1,0 +1,16 @@
+[01-Jun-2019 23:18:19 Asia/Saigon] PHP Warning:  Uncaught ErrorException: require_once(/home/ls4l5t27896f/public_html/app\Library\Checkout\config.php): failed to open stream: No such file or directory in /home/ls4l5t27896f/public_html/app/Http/Controllers/NganLuongController.php:11
+Stack trace:
+#0 /home/ls4l5t27896f/public_html/app/Http/Controllers/NganLuongController.php(11): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require_once(/h...', '/home/ls4l5t278...', 11, Array)
+#1 /home/ls4l5t27896f/public_html/app/Http/Controllers/NganLuongController.php(11): require_once()
+#2 [internal function]: App\Http\Controllers\NganLuongController->postNganluong(Object(Illuminate\Http\Request))
+#3 /home/ls4l5t27896f/public_html/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#4 /home/ls4l5t27896f/public_html/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('postNganluong', Array)
+#5 /home/ls4l5t27896f/public_html/vendor/larav in /home/ls4l5t27896f/public_html/app/Http/Controllers/NganLuongController.php on line 11
+[01-Jun-2019 23:18:19 Asia/Saigon] PHP Fatal error:  App\Http\Controllers\NganLuongController::postNganluong(): Failed opening required '/home/ls4l5t27896f/public_html/app\Library\Checkout\config.php' (include_path='.:/opt/alt/php72/usr/share/pear') in /home/ls4l5t27896f/public_html/app/Http/Controllers/NganLuongController.php on line 11
+[03-Sep-2019 08:19:05 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/xsharest/data.xsharestorage.com/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 242
+[03-Sep-2019 08:19:13 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/xsharest/data.xsharestorage.com/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 242
+[03-Sep-2019 08:20:15 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/xsharest/data.xsharestorage.com/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 242
+[03-Sep-2019 08:20:29 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/xsharest/data.xsharestorage.com/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 242
+[03-Sep-2019 08:21:42 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/xsharest/data.xsharestorage.com/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 242
+[03-Sep-2019 08:21:43 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/xsharest/data.xsharestorage.com/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 242
+[03-Sep-2019 08:21:44 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/xsharest/data.xsharestorage.com/vendor/laravel/framework/src/Illuminate/Foundation/helpers.php on line 242

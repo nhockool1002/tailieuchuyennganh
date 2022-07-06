@@ -1,0 +1,203 @@
+.menu-item-config {
+	border: 1px solid #b7b7b7;
+    padding: 3%;
+    margin: 0 5%;
+    margin-bottom: 1%;
+    background-color: #fbfbfb;
+    border-radius: 10px;
+}
+
+.custom-link-menu {
+	padding: 3%;
+}
+
+/* Links Configure CSS */
+.link-tab {
+	box-sizing: border-box;
+	font-family: 'Muli', "Helvetica", Arial, sans-serif;
+}
+
+.link-tab {
+    height: 100%;
+    margin: 0;
+    font-family: Arial;
+}
+
+.tablink {
+    background-color: #e8d5c1;
+    color: #1d1d1d;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+    width: 25%;
+    font-weight: bolder;
+}
+
+.tablink:hover,.tablink.active {
+    background-color: #582f2f;
+    color: whitesmoke;
+    transition: 1s ease all;
+}
+
+.tabcontent {
+    background-color: #efefef;
+    color: #5f5c5c;
+    padding: 5% 2%;
+    display: none;
+    height: 100%;
+}
+
+.card .numbers{
+    font-size: 1.19em;
+    font-weight: bolder;
+}
+
+a#your-link_previous {
+    background-color: #582f2f !important; 
+    color: white !important;
+    padding: 1% !important;
+}
+
+a#your-link_next {
+    background-color: #582f2f !important;
+    color: white !important;
+    padding: 1% !important;
+}
+
+a.paginate_button.current {
+    background-color: #e8d5c1 !important;
+    border: 1px solid #5d4a4a !important;
+    color: #582f2f !important;
+    font-weight: bolder !important;
+    padding: 1% !important;
+    margin: 0 0.2% !important;
+}
+
+a.paginate_button {
+    background-color: #582f2f !important;
+    padding: 1% !important;
+    color: white !important;
+    margin: 0 0.2% !important;
+}
+
+.overview-edit {
+    font-weight: bolder;
+    color:red;
+    font-style: italic;
+}
+
+span.search-item-data {
+    background-color: #822828;
+    padding: 1%;
+    color: white;
+    font-weight: bolder;
+    display: inline-block;
+    margin-bottom: 1%;
+}
+
+span.search-item-data a {
+    font-weight: bolder;
+}
+
+.search-data-table {
+    padding : 2% !important;
+}
+
+span.twitter-typeahead {
+    width: 100% !important;
+}
+
+ul#hashtagged-ul, ul#hashtag-ul {
+    list-style-type: none;
+}
+
+li.li-hashtag {
+    display: inline-flex;
+    margin-left: 1%;
+    background-color: #7ac29a;
+    font-weight: bolder;
+    border: 2px solid #2a5f41;
+    padding: 1%;
+    border-radius: 20px;
+    font-size: 0.8em;
+    margin-bottom: 1%;
+    padding-right: 5px;
+}
+
+.list-hashtagged {
+    border: 1px solid #ccc5b9;
+    border-radius: 4px;
+    padding-top: 2%;
+    min-height: 50px;
+    height: auto;
+}
+
+span.removeHTNow {
+    border-radius: 100%;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    display: inline-block;
+    margin-left: 5%;
+}
+
+.box-content {
+    min-height: 50px;
+    border: 1px solid #ccc5b9;
+    margin-left: 15px;
+    width: 96%;
+    border-radius: 5px;
+    height: auto;
+    padding-bottom: 2%;
+}
+
+button.custom-dl-btn {
+    background-color: #9e3b4c;
+    width: 85px;
+    height: 40px;
+    color: white;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 25px;
+    border: 0;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    margin-left: 2%;
+}
+
+.downloaded-box {
+    margin-bottom: 1%;
+}
+
+button.btn.btn-romo.btn-warning.btn-fill.btn-xs {
+    border-radius: 0;
+    height: 38px;
+    width: 38px;
+}
+
+.card form [class*="col-"] {
+    padding-left: 1%;
+}
+
+.card form [class*="col-"]:first-child {
+    padding-left: 1%;
+}
+
+.setting-page .card .content .row {
+    margin-right: unset;
+    margin-left: unset;
+}
+
+.donateboxsetting {
+    padding: 15px;
+}
+
+.donateboxsetting table td {
+    word-break: break-word;
+}
