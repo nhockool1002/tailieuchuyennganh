@@ -14,7 +14,11 @@
         @endif
 
         @php
+        if (strpos(url()->current(), 'post')) {
             $desc = str_replace('"', "", substr(html_entity_decode(strip_tags($posts->post_content)), 0, 165)) . "...";
+        } else {
+            $desc = ""
+        }
         @endphp
 
         @if (strpos(url()->current(), 'post'))        
