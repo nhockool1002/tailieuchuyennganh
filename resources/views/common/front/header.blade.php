@@ -12,16 +12,18 @@
         @else
             <title>{{ \Constant::TITLE_NAME }}</title>
         @endif
+
+        @if (strpos(url()->current(), 'post'))
+        <meta name="description" content="{{ strip_tags(trim(html_entity_decode(getExcerpt($posts->post_content, 0, 169)))) }}" />
+        @else
+        <meta name="description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data." />
+        @endif
 		
-
-		<meta name="description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí." />
-		<meta content='Tài nguyên miễn phí, tài liệu miễn phí, chia sẻ tài liệu' name='keywords'/>
-
 		<meta content='blogger' name='generator'/>
 
         <!-- Schema.org markup for Google+ -->
         <meta itemprop="name" content="@stack('postname') {{ \Constant::TITLE_NAME }}">
-        <meta itemprop="description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí.">
+        <meta itemprop="description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data.">
         @if (strpos(url()->current(), 'post'))
 		<meta property="og:image" content="{{ \Constant::UPLOAD_PATH }}{{ $posts->post_img }}" />
         @else
@@ -39,7 +41,14 @@
         @else
             <meta name="twitter:title" content="{{ \Constant::TITLE_NAME }}">
         @endif
-        <meta name="twitter:description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí.">
+
+        @if (strpos(url()->current(), 'post'))
+        <meta name="twitter:description" content="{{ strip_tags(trim(html_entity_decode(getExcerpt($posts->post_content, 0, 169)))) }}" />
+        @else
+        <meta name="twitter:description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data.">
+        @endif
+
+        <meta name="twitter:description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data.">
         <meta name="twitter:creator" content="Tài liệu chuyên ngành">
         @if (strpos(url()->current(), 'post'))
 		<meta name="twitter:image:src" content="{{ \Constant::UPLOAD_PATH }}{{ $posts->post_img }}" />
@@ -65,7 +74,15 @@
         <meta property="og:image" content="https://tailieuchuyennganh.com/img/banner1.jpg" />
         @endif
         <meta property="og:image:alt" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí" />
-        <meta property="og:description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data. Và tất cả tài nguyên đều hoàn toàn miễn phí." />
+
+        @if (strpos(url()->current(), 'post'))
+        <meta property="og:description" content="{{ strip_tags(trim(html_entity_decode(getExcerpt($posts->post_content, 0, 169)))) }}" />
+        @else
+        <meta property="og:description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data." />
+        @endif
+
+        <link rel="canonical" href="{{url()->current()}}" />
+
         <link rel="icon" type="image/png" href="{{ asset(\Constant::FAV_ICON_PATH) }}"/>
 		<!-- Google font -->
         <link href="https://fonts.googleapis.com/css?family=Cuprum:400,400i,700,700i&amp;subset=vietnamese" rel="stylesheet">
