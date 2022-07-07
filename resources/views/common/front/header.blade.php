@@ -6,15 +6,19 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
 		@if (strpos(url()->current(), 'post'))
-		    <title>{{ $posts->post_name }} - {{ \Constant::TITLE_NAME_TOP }}</title>
+        <title>{{ $posts->post_name }}</title>
         @elseif (strpos(url()->current(), 'category'))
-            <title>{{ $cat->cat_name }} - {{ \Constant::TITLE_NAME_TOP }}</title>
+        <title>{{ $cat->cat_name }} - {{ \Constant::TITLE_NAME_TOP }}</title>
         @else
-            <title>{{ \Constant::TITLE_NAME }}</title>
+        <title>{{ \Constant::TITLE_NAME }}</title>
         @endif
 
-        @if (strpos(url()->current(), 'post'))
-        <meta name="description" content="{{ strip_tags(trim(html_entity_decode(getExcerpt($posts->post_content, 0, 169)))) }}" />
+        @php
+            $desc = str_replace('"', "", substr(html_entity_decode(strip_tags($posts->post_content)), 0, 165)) . "...";
+        @endphp
+
+        @if (strpos(url()->current(), 'post'))        
+        <meta name="description" content="{{ $desc }}" />
         @else
         <meta name="description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data." />
         @endif
@@ -23,7 +27,14 @@
 
         <!-- Schema.org markup for Google+ -->
         <meta itemprop="name" content="@stack('postname') {{ \Constant::TITLE_NAME }}">
+        
+        @if (strpos(url()->current(), 'post'))        
+        <meta itemprop="description" content="{{ $desc }}">
+        @else
         <meta itemprop="description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data.">
+        @endif
+
+
         @if (strpos(url()->current(), 'post'))
 		<meta property="og:image" content="{{ \Constant::UPLOAD_PATH }}{{ $posts->post_img }}" />
         @else
@@ -43,7 +54,7 @@
         @endif
 
         @if (strpos(url()->current(), 'post'))
-        <meta name="twitter:description" content="{{ strip_tags(trim(html_entity_decode(getExcerpt($posts->post_content, 0, 169)))) }}" />
+        <meta name="twitter:description" content="{{ $desc }}" />
         @else
         <meta name="twitter:description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data.">
         @endif
@@ -76,7 +87,7 @@
         <meta property="og:image:alt" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí" />
 
         @if (strpos(url()->current(), 'post'))
-        <meta property="og:description" content="{{ strip_tags(trim(html_entity_decode(getExcerpt($posts->post_content, 0, 169)))) }}" />
+        <meta property="og:description" content="{{ $desc }}" />
         @else
         <meta property="og:description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data." />
         @endif
