@@ -22,10 +22,10 @@ class HomeController extends Controller
     	$recent3post2 = Post::orderBy('id', 'desc')->skip(3)->take(3)->get();
     	$stickytop2post = Post::where('post_special', '1')->orderBy('id', 'desc')->take(2)->get();
     	$random7post = Post::inRandomOrder()->take(7)->get();
-    	$random2book = Post::where('cat_id', '1')->inRandomOrder()->take(2)->get();
+    	$random2book = Post::where('cat_id', '19')->inRandomOrder()->take(2)->get();
     	$digital3post = Post::where('cat_id', '4')->orderBy('id', 'desc')->take(3)->get();
     	$foreign4post = Post::where('cat_id', '3')->orderBy('id', 'desc')->take(6)->get();
-    	$graphic6post = Post::where('cat_id', '6')->orderBy('id', 'desc')->take(4)->get();
+    	$graphic6post = Post::where('cat_id', '20')->orderBy('id', 'desc')->take(4)->get();
         $homepage_rightside_300x250_first = Ads::where('ads_zone', 'homepage_rightside_300x250_first')->first();
         $homepage_rightside_300x250_second = Ads::where('ads_zone', 'homepage_rightside_300x250_second')->first();
         $popup = Setting::where('config_name', 'popup')->first();

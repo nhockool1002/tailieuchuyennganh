@@ -20,7 +20,7 @@ class PageTableSeeder extends Seeder
 
 <p>- Để b&aacute;o lỗi trang web, lỗi link tải, bất kỳ nội dung n&agrave;o m&agrave; bạn cần hổ trợ từ đội ngũ của ch&uacute;ng t&ocirc;i, hoặc bạn cần li&ecirc;n hệ đặt quảng c&aacute;o tr&ecirc;n website của ch&uacute;ng t&ocirc;i.</p>
 
-<p><strong>xshare.community@gmail.com</strong></p>',
+<p><strong>dulieuchuyennganh@gmail.com</strong></p>',
         	'page_img' => 'uF6QQQQ6Fu.png'
         ]);
 
