@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\Link\CreateLink;
+use DB;
 use Auth;
 use App\Log;
 use App\User;
@@ -109,54 +110,67 @@ class LinkController extends Controller
         return redirect(route('link',['param' => 'service']))->with('success_mesage','Delete service successfully.');
     }
 
-    public function createLink(Request $request) {
-    	$this->validate($request, 
-    		[
-    			'title' => 'required',
-    			'link' => 'required'
-    		], 
-    		[
-    			'title.required' => 'Title can\'t not empty.',
-    			'link.required' => 'Link can\'t not empty.',
-    		]);
-
+    public function createLink(CreateLink $request) {
     	if (TokenApiShortLink::where('user_id', Auth::user()->id)->count() == 0) {
-    		return redirect(route('link',['param' => 'create']))->with('warning_mesage','Token API Empty or wrong');
+    		return redirect(
+					route('link',	['param' => 'create']))
+					->with('warning_mesage', \Constant::TOKEN_API_EMPTY
+				);
     	}
     	
-    	$service = ServiceApiShortLink::all();
-    	$token = TokenApiShortLink::where('user_id', Auth::user()->id)->first();
-    	$token = json_decode($token->api_token, true);
-    	$data = [];
-    	foreach ($service as $item) {
-    		$long_url = urlencode($request->link);
-			$api_token = $token[$item->key_service];
-            if ($api_token != null) {
-			$api_url = $item->api_service_url."api={$api_token}&url={$long_url}";
-			$result = @json_decode(file_get_contents($api_url),TRUE);
-			if($result['status'] === 'error') {
-				return redirect(route('link',['param' => 'create']))->with('warning_mesage','Please check URL or Token API on General page');
-			} else {
-				$data[$item->key_service] = $result['shortenedUrl'];
+			$service = ServiceApiShortLink::all();
+			$token = TokenApiShortLink::where('user_id', Auth::user()->id)->first();
+			$token = json_decode($token->api_token, true);
+			$data = [];
+
+			foreach ($service as $item) {
+				$long_url = urlencode($request->link);
+				$api_token = $token[$item->key_service];
+
+				if ($api_token != null) {
+					$api_url = $item->api_service_url."api={$api_token}&url={$long_url}";
+					$result = @json_decode(file_get_contents($api_url),TRUE);
+
+					if($result['status'] === 'error') {
+						return redirect(
+							route('link', ['param' => 'create']))
+							->with('warning_mesage', \Constant::UNVALID_URL_OR_TOKEN_API
+						);
+					} else {
+						$data[$item->key_service] = $result['shortenedUrl'];
+					}
+				}
 			}
-            }
 
-    	}
-    	$link = new Link();
-  		$link->link_title = $request->title;
-  		$link->origin_link = $request->link;
-    	$link->hash = $this->generateString();
-    	$link->user_id = Auth::user()->id;
-    	$link->shorten_list = json_encode($data);
-    	$link->save();
+			// Insert Multi Table
+			DB::beginTransaction();
+			try {
+				// Insert Link list
+				$link = new Link();
+				$link->link_title = $request->title;
+				$link->origin_link = $request->link;
+				$link->hash = $this->generateString();
+				$link->user_id = Auth::user()->id;
+				$link->shorten_list = json_encode($data);
+				$link->save();
 
-    	$log = new Log();
+				// Insert Log
+				$log = new Log();
         $log->changelog = 'Create Shortlink '.'<b><font color="#89f442">'.$request->title.'</font></b>'.' successfully';
         $log->user = Auth::user()->username;
         $log->screen = \Constant::CREATE_SHORTLINK_FUNCTION;
         $log->save();
 
-        return redirect(route('link',['param' => 'create']))->with('link_created',$link->hash);
+				DB::commit();
+				return redirect(
+					route('link', ['param' => 'create'])
+				)->with('link_created',$link->hash);
+			} catch (\Throwable $th) {
+				DB::rollBack();
+				return redirect(
+					route('link', ['param' => 'create'])
+				)->with('link_created_error', \Constant::CREATE_SHORT_LINK_ERROR);
+			}
     }
 
     public function getRedirect($string) {

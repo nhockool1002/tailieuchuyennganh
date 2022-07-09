@@ -53,4 +53,8 @@ class Constant
     const SETTING_UNDER_CONSTRUCTION = 'Under Construct Update';
     //PATH
     const IMAGE_THUMB_POST = 'upload/posts/images';
+
+    const TOKEN_API_EMPTY = 'TOKEN API MISSING';
+    const UNVALID_URL_OR_TOKEN_API = "UNVALID_URL_OR_TOKEN_API";
+    const CREATE_SHORT_LINK_ERROR = "CREATE_SHORT_LINK_ERROR";
 }

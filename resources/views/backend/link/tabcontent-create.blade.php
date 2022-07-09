@@ -38,3 +38,16 @@
     </div>
 </div>
 @endif 
+@if(session('link_created_error'))
+<div class="row">
+    <div class="col-md-12">
+    	<div class="form-group alert alert-info">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <label style="color:red"><h4>{session('link_created_error')}</h4></label>
+                </div>
+            </div>
+    	</div>
+    </div>
+</div>
+@endif 

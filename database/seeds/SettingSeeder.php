@@ -71,7 +71,9 @@ class SettingSeeder extends Seeder
 
         DB::table('setting')->insert([
             'config_name' => 'popup',
-            'config_setting' => ''
+            'config_setting' => json_encode(
+                array("state" => 0,  "title" => "Title", "content" => "Content")
+            )
         ]);
     }
 }

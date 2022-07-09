@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableReport extends Migration
+class CreateS3ManageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTableReport extends Migration
      */
     public function up()
     {
-        Schema::create('report', function (Blueprint $table) {
+        Schema::create('s3_manage', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('post_name');
-            $table->string('ip_report');
+            $table->string('title');
+            $table->string('hash');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateTableReport extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('report');
+        Schema::dropIfExists('s3_manage');
     }
 }
