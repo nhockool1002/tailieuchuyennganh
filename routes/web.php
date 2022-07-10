@@ -22,7 +22,7 @@ Route::group(['prefix' => '/', 'middleware' => 'checkunderconstruct'], function 
     Route::prefix('/go')->group(function () {
         Route::get('{string}', 'LinkController@getRedirect')->name('getRedirect');    
     });
-    Route::group(['prefix' => 's3link', 'middleware' => 'checkadmin'], function () {
+    Route::group(['prefix' => 's3link', 'middleware' => 'checkunderconstruct'], function () {
         Route::get('/{slug}', 'S3ManageController@gotoS3Link')->name('gotoS3Link');
     });
 
