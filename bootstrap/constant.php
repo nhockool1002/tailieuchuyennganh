@@ -41,6 +41,7 @@ class Constant
     const DELETE_SERVICE_SHORTLINK_FUNCTION = 'Delete Service Link';
     const CREATE_SHORTLINK_FUNCTION = 'Create Shortlink Link';
     const DELETE_SHORTLINK_FUNCTION = 'Delete Shortlink Link';
+    const CREATE_S3_FUNCTION = 'Create S3 Link';
 
     const ADVERTISEMENT_STORE_FUNCTION = 'Advertisement Store';
 
@@ -57,4 +58,8 @@ class Constant
     const TOKEN_API_EMPTY = 'TOKEN API MISSING';
     const UNVALID_URL_OR_TOKEN_API = "UNVALID_URL_OR_TOKEN_API";
     const CREATE_SHORT_LINK_ERROR = "CREATE_SHORT_LINK_ERROR";
+    const CREATE_S3_COMPLETED = "CREATE_S3_COMPLETED";
+    const CREATE_S3_ERROR= "CREATE_S3_ERROR";
+    const DELETE_S3_ERROR= "DELETE_S3_ERROR";
+    const DELETE_S3_COMPLETED= "DELETE_S3_COMPLETED";
 }

@@ -201,3 +201,8 @@ button.btn.btn-romo.btn-warning.btn-fill.btn-xs {
 .donateboxsetting table td {
     word-break: break-word;
 }
+
+.hashS3Item {
+    width: 400px;
+    height: 30px;
+}

@@ -10,6 +10,7 @@ use Auth;
 use App\Log;
 use App\User;
 use App\Link;
+use App\S3Manage;
 use App\ServiceApiShortLink;
 use App\TokenApiShortLink;
 
@@ -18,9 +19,10 @@ class LinkController extends Controller
     public function getlLinkConfig() {
     	$service = ServiceApiShortLink::all();
     	$token = TokenApiShortLink::where('user_id', Auth::user()->id)->first();
-        $allurl = Link::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
+			$allurl = Link::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
     	$member = Auth::user();
-    	return view('backend.link.index', compact('service', 'member', 'token', 'allurl'));
+			$s3Link = S3Manage::orderBy("id", "DESC")->get();
+    	return view('backend.link.index', compact('service', 'member', 'token', 'allurl', 's3Link'));
     }
 
     public function updateService(Request $request) {

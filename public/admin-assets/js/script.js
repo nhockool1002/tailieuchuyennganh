@@ -17,3 +17,10 @@ function cpc() {
   	document.execCommand("copy");
   	alert("Đã sao chép liên kết : " + copyText.value);
 }
+
+function cpcS3() {
+	var copyText = document.getElementById("newLinkS3");
+  	copyText.select();
+  	document.execCommand("copy");
+  	alert("Đã sao chép liên kết : " + copyText.value);
+}
