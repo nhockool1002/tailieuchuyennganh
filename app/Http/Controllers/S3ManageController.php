@@ -72,7 +72,6 @@ class S3ManageController extends Controller
 
     public function gotoS3Link($slug) {
         $item = S3Manage::where("hash", $slug)->first();
-        dd($item);
         if ($item !== null) {
             $s3 = App::make('aws')->createClient('s3');
         
