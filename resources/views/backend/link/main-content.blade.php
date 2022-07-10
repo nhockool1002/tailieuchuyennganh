@@ -127,7 +127,9 @@
                                                 <td width="30%">
                                                     <div class="hashS3Item">{{ $item->hash }}</div>
                                                 </td>
-                                                <td width="10%">#A</td>
+                                                <td width="10%">
+                                                    <a href="{{ \Constant::URL_HOME}}s3link/{{$item->hash}}" target="_blank">[S3 LINK]</a>
+                                                </td>
                                                 <td width="10%">
                                                     <a href="{{ route('deleteS3Link', ['id' => $item->id])}}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="ti-close"></i></a>
                                                 </td>

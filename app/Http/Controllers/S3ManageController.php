@@ -29,7 +29,7 @@ class S3ManageController extends Controller
                 $s3->putObject([
                     'Key' => $key,
                     'SourceFile' => $path,
-                    'Bucket' => env('AWS_BUCKET')
+                    'Bucket' => env('AWS_BUCKET'),
                 ]);
             } catch (\Exception $e) {
                 return redirect(
@@ -72,6 +72,7 @@ class S3ManageController extends Controller
 
     public function gotoS3Link($slug) {
         $item = S3Manage::where("hash", $slug)->first();
+        dd($item);
         if ($item !== null) {
             $s3 = App::make('aws')->createClient('s3');
         
@@ -94,29 +95,16 @@ class S3ManageController extends Controller
         $item = S3Manage::where("id", $id)->first();
 
         if($item !== null) {
-            try {
-                $s3 = App::make('aws')->createClient('s3');
-
-                try {
-                    $s3->deleteObject([
-                        'Key' => $item->hash,
-                        'Bucket' => env('AWS_BUCKET')
-                    ]);
-                } catch (\Exception $e) {
-                    return redirect(
-                        route('link',['param' => 'create'])
-                    )->with('s3_warning_message', \Constant::DELETE_S3_ERROR);
-                }
-                
+            try {                
                 DB::beginTransaction();
                 try {
-                    $item->delete();
+                    S3Manage::where("id", $id)->delete();
+                    DB::commit();
                     return redirect(
                         route('link', ['param' => 'create'])
                     )->with('s3_success_message', \Constant::DELETE_S3_COMPLETED);
                 } catch (\Exception $e) {
                     DB::rollBack();
-                    dd($e->getMessage());
                     return redirect(
                         route('link', ['param' => 'create'])
                     )->with('link_created_s3_error', \Constant::DELETE_S3_ERROR);
