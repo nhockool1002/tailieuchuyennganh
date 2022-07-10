@@ -22,6 +22,9 @@ Route::group(['prefix' => '/', 'middleware' => 'checkunderconstruct'], function 
     Route::prefix('/go')->group(function () {
         Route::get('{string}', 'LinkController@getRedirect')->name('getRedirect');    
     });
+    Route::group(['prefix' => 's3link', 'middleware' => 'checkadmin'], function () {
+        Route::get('/{slug}', 'S3ManageController@gotoS3Link')->name('gotoS3Link');
+    });
 
     Route::middleware('countviewpost')->group(function() {
         Route::prefix('post/{id}/{slug}')->group(function () {
@@ -212,6 +215,11 @@ Route::group(['prefix' => 'backend', 'middleware' => ['checklogin', 'checkunderc
     Route::group(['prefix' => 'log', 'middleware' => 'checkadmin'], function () {
         Route::get('', 'LogController@getAll')->name('log');
         Route::get('deleteAllLog', 'LogController@deleteAllLog')->name('deleteAllLog');
+    });
+    
+    Route::group(['prefix' => 's3-manage', 'middleware' => 'checkadmin'], function () {
+        Route::post('', 'S3ManageController@uploadS3')->name('uploads3post');
+        Route::get('/delete/{id}', 'S3ManageController@deleteS3Link')->name('deleteS3Link');
     });
 
     Route::group(['prefix' => 'filter', 'middleware' => 'checkadmin'], function () {
