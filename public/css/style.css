@@ -474,6 +474,7 @@ RESPONSIVE
 }
  #post-header.page-header h1 {
      color: #FFF;
+     text-shadow: 2px 3px 3px black;
 }
  .page-header .post-meta {
      margin: 15px 0px;
