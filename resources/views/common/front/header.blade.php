@@ -71,7 +71,7 @@
         <meta name="twitter:image:src" content="https://tailieuchuyennganh.com/img/banner1.jpg">
         @endif
         <meta property="fb:admins" content="100002753472309"/>
-        <meta property="fb:app_id" content="287055021963669"/>
+        <meta property="fb:app_id" content="513881545829406"/>
         <!-- Open Graph data -->
         <meta content='{{ \Constant::TITLE_NAME_TOP }}' property='og:site_name'/>
         @if (strpos(url()->current(), 'post'))
@@ -96,7 +96,11 @@
         <meta property="og:description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data." />
         @endif
 
+        @if (strpos(url()->current(), 'hashtag'))
+        <link rel="canonical" href="{{url()->current()}}?hashtag={{ $filter }}" />
+        @else
         <link rel="canonical" href="{{url()->current()}}" />
+        @endif
 
         <link rel="icon" type="image/png" href="{{ asset(\Constant::FAV_ICON_PATH) }}"/>
 		<!-- Google font -->
