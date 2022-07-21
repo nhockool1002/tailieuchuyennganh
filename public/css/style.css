@@ -1205,16 +1205,35 @@ ul.list-relate li a {
 }
 
 a.hashtag-a {
-    background-color: #5d9a6d;
-    padding: 1%;
+    position: relative;
+    background-color: #e4e6e6;
+    padding: 3px;
     box-sizing: border-box;
     font-size: 0.7em;
-    border: 1px solid #40652e;
-    margin-right: 1%;
-    border-radius: 10px;
+    margin-right: 25px;
     display: inline-block;
     margin-top: 6px;
-    color: white;
+    color: #272121;
+    border-radius: 10px 0 0 10px;
+    padding-left: 6px;
+    height: 22px;
+    line-height: 19px;
+}
+
+a.hashtag-a:before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background-image: url(../img/hash.png);
+    background-size: 10px 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    top: 0;
+    right: -22px;
+    display: block;
+    background-color: #0e232c38;
+    border-radius: 0 10px 10px 0;
 }
 
 a.hashtag-a:hover {

@@ -115,16 +115,35 @@ ul#hashtagged-ul, ul#hashtag-ul {
 }
 
 li.li-hashtag {
-    display: inline-flex;
-    margin-left: 1%;
-    background-color: #7ac29a;
-    font-weight: bolder;
-    border: 2px solid #2a5f41;
-    padding: 1%;
-    border-radius: 20px;
-    font-size: 0.8em;
-    margin-bottom: 1%;
-    padding-right: 5px;
+    position: relative;
+    background-color: #e4e6e6;
+    padding: 3px;
+    box-sizing: border-box;
+    font-size: 0.7em;
+    margin-right: 25px;
+    display: inline-block;
+    margin-top: 6px;
+    color: #272121;
+    border-radius: 10px 0 0 10px;
+    padding-left: 6px;
+    height: 22px;
+    line-height: 19px;
+}
+
+li.li-hashtag:before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background-image: url(../../img/hash.png);
+    background-size: 10px 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    top: 0;
+    right: -22px;
+    display: block;
+    background-color: #0e232c38;
+    border-radius: 0 10px 10px 0;
 }
 
 .list-hashtagged {
@@ -140,11 +159,14 @@ span.removeHTNow {
     background-color: black;
     color: white;
     cursor: pointer;
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
+    line-height: 10px;
     text-align: center;
-    display: inline-block;
-    margin-left: 5%;
+    position: absolute;
+    top: -3px;
+    left: -1px;
+    font-size: 6px;
 }
 
 .box-content {
