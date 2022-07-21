@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App;
 use App\S3Manage;
-use App\Log;
+use App\Log as LogCustom;
 use DB;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class S3ManageController extends Controller
 {
@@ -32,6 +33,7 @@ class S3ManageController extends Controller
                     'Bucket' => env('AWS_BUCKET'),
                 ]);
             } catch (\Exception $e) {
+                Log::error($e->getMessage());
                 return redirect(
                     route('link',['param' => 'create'])
                 )->with('s3_warning_message', \Constant::CREATE_S3_ERROR);
@@ -46,7 +48,7 @@ class S3ManageController extends Controller
 
 
                 // Insert Log
-				$log = new Log();
+				$log = new LogCustom();
                 $log->changelog = 'Create S3 Link '.'<b><font color="#89f442">'.$name.'</font></b>'.' successfully';
                 $log->user = Auth::user()->username;
                 $log->screen = \Constant::CREATE_S3_FUNCTION;
@@ -58,7 +60,7 @@ class S3ManageController extends Controller
 				)->with('link_s3_created',$key);
             } catch (\Exception $e) {
                 DB::rollBack();
-                dd($e->getMessage());
+                Log::error($e->getMessage());
 				return redirect(
 					route('link', ['param' => 'create'])
 				)->with('link_created_s3_error', \Constant::CREATE_S3_ERROR);
@@ -94,10 +96,20 @@ class S3ManageController extends Controller
         $item = S3Manage::where("id", $id)->first();
 
         if($item !== null) {
+            try {
+                $s3 = App::make('aws')->createClient('s3');
+                $s3->deleteObject([
+                    'Bucket' => env('AWS_BUCKET'),
+                    'Key'    => $item->hash
+                ]);
+            } catch (\Exception $e) {
+                Log::error($e->getMessage());
+                abort(404);
+            }
             try {                
                 DB::beginTransaction();
                 try {
-                    S3Manage::where("id", $id)->delete();
+                    S3Manage::where("id", $id)->forceDelete();
                     DB::commit();
                     return redirect(
                         route('link', ['param' => 'create'])
@@ -109,6 +121,7 @@ class S3ManageController extends Controller
                     )->with('link_created_s3_error', \Constant::DELETE_S3_ERROR);
                 }
             } catch (\Exception $e) {
+                Log::error($e->getMessage());
                 return redirect(
                     route('link', ['param' => 'create'])
                 )->with('link_created_s3_error',$e->getMessage());
