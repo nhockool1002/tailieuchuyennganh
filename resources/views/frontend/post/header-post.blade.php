@@ -1,6 +1,8 @@
 			<!-- Page Header -->
 			<div id="post-header" class="page-header">
-				<div class="background-img" style="background-image: url('{{ \Constant::UPLOAD_PATH }}{{ $posts->post_img }}');"></div>
+				<div id="particles-js"></div> 
+				<div class="background-img" style="background-image: url('{{ \Constant::UPLOAD_PATH }}{{ $posts->post_img }}');">
+				</div>
 				<div class="container">
 					<div class="row">
 						<div class="col-md-10">

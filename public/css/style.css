@@ -455,6 +455,13 @@ RESPONSIVE
      background-position: center;
      background-size: cover;
 }
+.page-header #particles-js{
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
  .page-header .background-img:after {
      content: '';
      position: absolute;
