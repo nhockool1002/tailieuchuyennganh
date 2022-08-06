@@ -4,7 +4,7 @@
 						<div class="row">
 						    <br />
 								<div class="fshare-banner" style="width:98%">
-								<a href="#" style="width:98%"><img src="https://via.placeholder.com/728x90" style="width:100%"></a>
+								<a href="#" style="width:98%"><img src="https://placehold.jp/728x90.png" style="width:100%"></a>
 								</div>
 								<br />
 							@for($i = 0; $i < count($random7post); $i++)								

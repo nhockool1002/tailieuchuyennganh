@@ -15,7 +15,7 @@
     {!! $posts->post_content !!}
     <br />
     <div class="fshare-banner">
-    <a href="#" style="width:100%"><img src="https://via.placeholder.com/728x90" alt="ads after post content" style="width:100%"></a>
+    <a href="#" style="width:100%"><img src="https://placehold.jp/728x90.png" alt="ads after post content" style="width:100%"></a>
     </div>
     <!-- @include('frontend.post.spoiler') -->
     <hr />
