@@ -38,9 +38,12 @@
 								</ul>
 							</div>
 
+					<!-- ADNOW -->
+					<div class="addNowAdsAfterHashtag">
+						<div id="SC_TBlock_874767"></div>
+					</div>
 			</div>
-			<!-- ADNOW -->
-			<div id="SC_TBlock_874767"></div>
+			
 			<!-- /container -->
 		</div>
 		<!-- POPUP -->
