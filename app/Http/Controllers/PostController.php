@@ -27,19 +27,19 @@ class PostController extends Controller
         $mod = 'Moderator';
         $admin = 'Administrator';
         $user = Auth::user();
-        if($user->role->role_name == $mod) {
+        if ($user->role->role_name == $mod) {
             $cat = Moderator::where('user_id', $user->id)->get();
             $listcat = [];
-            foreach($cat as $item) {
+            foreach ($cat as $item) {
                 $listcat[] = $item->cat_id;
             }
             $posts = Post::whereIn('cat_id', $listcat)->orderBy('id', 'DESC')->paginate(20);
         }
 
-        if($user->role->role_name == $admin) {
+        if ($user->role->role_name == $admin) {
             $posts = Post::orderBy('id', 'DESC')->paginate(20);
         }
-        
+
         return view('backend.post.index', compact('posts'));
     }
 
@@ -52,10 +52,10 @@ class PostController extends Controller
         $post = Post::find($id);
 
 
-        if($user->role->role_name == $mod) {
+        if ($user->role->role_name == $mod) {
             $cat = Moderator::where('user_id', $user->id)->get();
             $listcat = [];
-            foreach($cat as $item) {
+            foreach ($cat as $item) {
                 $listcat[] = $item->cat_id;
             }
             if (in_array($post->cat_id, $listcat) == true) {
@@ -69,17 +69,17 @@ class PostController extends Controller
             }
         }
 
-        if($user->role->role_name == $admin) {
-                $log = new Log();
-                $log->changelog = 'Delete Post  ' . '<b><font color="red">' . $post->post_name . '</font></b>';
-                $log->user = Auth::user()->username;
-                $log->screen = \Constant::DELETE_POST_FUNCTION;
-                $log->save();
-                $post->delete();
-                return redirect(route('post'))->with('success_mesage', 'Delete post successfully.');
+        if ($user->role->role_name == $admin) {
+            $log = new Log();
+            $log->changelog = 'Delete Post  ' . '<b><font color="red">' . $post->post_name . '</font></b>';
+            $log->user = Auth::user()->username;
+            $log->screen = \Constant::DELETE_POST_FUNCTION;
+            $log->save();
+            $post->delete();
+            return redirect(route('post'))->with('success_mesage', 'Delete post successfully.');
         }
 
-        return redirect(route('post'))->with('warning_mesage', 'Bạn không thể xóa bài viết trong danhh mục không quản lý.');       
+        return redirect(route('post'))->with('warning_mesage', 'Bạn không thể xóa bài viết trong danhh mục không quản lý.');
     }
 
     public function addPost()
@@ -87,26 +87,27 @@ class PostController extends Controller
         $mod = 'Moderator';
         $admin = 'Administrator';
         $user = Auth::user();
-        
-        if($user->role->role_name == $mod) {
+
+        if ($user->role->role_name == $mod) {
             $cat = Moderator::where('user_id', $user->id)->get();
             $listcat = [];
-            foreach($cat as $item) {
+            foreach ($cat as $item) {
                 $listcat[] = $item->cat_id;
             }
             $cats = Category::whereIn('id', $listcat)->get();
             return view('backend.post.add', compact('cats'));
         }
 
-        if($user->role->role_name == $admin) {
-                $cats = Category::all();
-                return view('backend.post.add', compact('cats'));
+        if ($user->role->role_name == $admin) {
+            $cats = Category::all();
+            return view('backend.post.add', compact('cats'));
         }
     }
 
     public function postaddPost(Request $request)
     {
-        $this->validate($request,
+        $this->validate(
+            $request,
             [
                 'title' => 'required',
                 'content' => 'required',
@@ -116,13 +117,14 @@ class PostController extends Controller
                 'title.required' => 'Không được để trống tên bài viết',
                 'content.required' => 'Nội dung bài viết không được để trống',
                 'thumb.required' => 'Hình đại diện không được để trống',
-            ]);
+            ]
+        );
 
-        
+
         if (isset($request->listdl) && !empty($request->listdl)) {
             $data = $request->listdl;
-            foreach($data as $item){
-                if ($item['title'] == NULL || $item['link'] == NULL){
+            foreach ($data as $item) {
+                if ($item['title'] == NULL || $item['link'] == NULL) {
                     return back()->with('warning_mesage', 'Nếu bật link download thì không được để trống Tiêu đề và Link');
                 }
             }
@@ -182,7 +184,7 @@ class PostController extends Controller
         $log->screen = \Constant::ADD_POST_FUNCTION;
         $log->save();
 
-        return redirect(route('editPost',$post->id))->with('success_mesage', 'Add post successfully.');
+        return redirect(route('editPost', $post->id))->with('success_mesage', 'Add post successfully.');
     }
 
     public function editPost($id)
@@ -202,7 +204,7 @@ class PostController extends Controller
         if ($user->role->role_name == $mod) {
             $cat = Moderator::where('user_id', $user->id)->get();
             $listcat = [];
-            foreach($cat as $item) {
+            foreach ($cat as $item) {
                 $listcat[] = $item->cat_id;
             }
             $cats = Category::whereIn('id', $listcat)->get();
@@ -212,10 +214,10 @@ class PostController extends Controller
             }
         }
 
-        if($user->role->role_name == $admin) {
-                $cats = Category::all();
-                $listtags = PostHashTag::where('post_id', $post->id)->get();
-                return view('backend.post.edit', compact('post', 'cats', 'listtags', 'linkdl'));
+        if ($user->role->role_name == $admin) {
+            $cats = Category::all();
+            $listtags = PostHashTag::where('post_id', $post->id)->get();
+            return view('backend.post.edit', compact('post', 'cats', 'listtags', 'linkdl'));
         }
 
         return redirect(route('post'))->with('warning_mesage', 'Bạn không thể sửa bài viết trong danhh mục không quản lý.');
@@ -223,7 +225,8 @@ class PostController extends Controller
 
     public function posteditPost(Request $request, $id)
     {
-        $this->validate($request,
+        $this->validate(
+            $request,
             [
                 'title' => 'required',
                 'content' => 'required',
@@ -231,12 +234,13 @@ class PostController extends Controller
             [
                 'title.required' => 'Không được để trống tên bài viết',
                 'content.required' => 'Nội dung bài viết không được để trống',
-            ]);
+            ]
+        );
 
         if (isset($request->listdl) && !empty($request->listdl)) {
             $data = $request->listdl;
-            foreach($data as $item){
-                if ($item['title'] == NULL || $item['link'] == NULL){
+            foreach ($data as $item) {
+                if ($item['title'] == NULL || $item['link'] == NULL) {
                     return back()->with('warning_mesage', 'Nếu bật link download thì không được để trống Tiêu đề và Link');
                 }
             }
@@ -253,9 +257,9 @@ class PostController extends Controller
             $file = $request->thumb;
             $extension = $file->extension();
             if (!in_array($extension, ['png', 'jpg', 'jpeg', 'gif'])) {
-                return redirect(route('editPost',$post->id))->withInput()->with('warning_mesage', 'Thumnaild phải là Tệp ảnh (PNG - JPG - JPEG = GIF )');
+                return redirect(route('editPost', $post->id))->withInput()->with('warning_mesage', 'Thumnaild phải là Tệp ảnh (PNG - JPG - JPEG = GIF )');
             }
-            File::delete('upload/posts/images/'.$post->post_img);
+            File::delete('upload/posts/images/' . $post->post_img);
             $file = $request->thumb;
             $rand = rand_string(5);
             $namefile = $file->getClientOriginalExtension();
@@ -272,7 +276,7 @@ class PostController extends Controller
             if (!empty($dl)) {
                 $dl->content = $zz;
                 $dl->save();
-            }else{
+            } else {
                 $dl = new DownloadPost();
                 $dl->post_id = $post->id;
                 $dl->content = $zz;
@@ -283,7 +287,7 @@ class PostController extends Controller
             if (!empty($dl)) {
                 $dl->content = '{}';
                 $dl->save();
-            }else{
+            } else {
                 $dl = new DownloadPost();
                 $dl->post_id = $post->id;
                 $dl->content = '{}';
@@ -318,7 +322,7 @@ class PostController extends Controller
         $log->screen = \Constant::ADD_POST_FUNCTION;
         $log->save();
 
-        return redirect(route('editPost',$post->id))->with('success_mesage', 'Edit post successfully.');
+        return redirect(route('editPost', $post->id))->with('success_mesage', 'Edit post successfully.');
     }
 
     public function filterPost()
@@ -329,11 +333,12 @@ class PostController extends Controller
     public function postfilterPost(Request $request)
     {
         $postname = $request->get('postname');
-        $posts = Post::where('post_name', 'LIKE', '%'.$postname. '%')->paginate(10);
+        $posts = Post::where('post_name', 'LIKE', '%' . $postname . '%')->paginate(10);
         return view('backend.post.filter', compact('posts'));
     }
 
-    public function getPost($id) {
+    public function getPost($id)
+    {
         $posts = Post::find($id);
         if (!isset($posts)) {
             return redirect(route('home'));
@@ -345,7 +350,7 @@ class PostController extends Controller
             $linkdl = json_decode($linkdl->content, TRUE);
         } else {
             $linkdl = [];
-        }        
+        }
         $cats = Category::all();
         $menus = Menu::all();
         $social = Setting::where('config_name', 'social')->first();
@@ -355,13 +360,16 @@ class PostController extends Controller
         $randompost = Post::inRandomOrder()->take(2)->get();
         $bottom_post_728x90 = Ads::where('ads_zone', 'bottom_post_728x90')->first();
         $bottom_right_widget_post_320x250 = Ads::where('ads_zone', 'bottom_right_widget_post_320x250')->first();
-        return view('frontend.post.index', compact('posts', 'cats', 'menus', 'recent3post', 'relatepost' , 'randompost', 'bottom_post_728x90' ,'bottom_right_widget_post_320x250', 'social', 'hashtags', 'linkdl'));
+        $category_top_content_728x90 = Ads::where('ads_zone', 'category_top_content_728x90')->first();
+
+        return view('frontend.post.index', compact('posts', 'cats', 'menus', 'recent3post', 'relatepost', 'randompost', 'bottom_post_728x90', 'bottom_right_widget_post_320x250', 'social', 'hashtags', 'linkdl', 'category_top_content_728x90'));
     }
 
-    public function getSearch(Request $request) {
+    public function getSearch(Request $request)
+    {
         $filter = $request->get('search');
         $filter = strip_tags(trim(html_entity_decode($filter)));
-        $search = SearchData::where('data',$filter)->first();
+        $search = SearchData::where('data', $filter)->first();
         if (isset($search)) {
             $search->search_count  = $search->search_count + 1;
             $search->save();
@@ -371,8 +379,8 @@ class PostController extends Controller
             $newsearch->search_count = 1;
             $newsearch->save();
         }
-        $posts = Post::where('post_name', 'LIKE', '%'.$filter. '%')->orderBy('id', 'DESC')->paginate(10);
-        $pages = Page::where('page_name', 'LIKE', '%'.$filter. '%')->paginate(10);
+        $posts = Post::where('post_name', 'LIKE', '%' . $filter . '%')->orderBy('id', 'DESC')->paginate(10);
+        $pages = Page::where('page_name', 'LIKE', '%' . $filter . '%')->paginate(10);
         $all = $posts->merge($pages);
         $cats = Category::all();
         $menus = Menu::all();
@@ -380,13 +388,14 @@ class PostController extends Controller
         $relatepost = Post::orderBy('id', 'asc')->take(3)->get();
         $category_right_widget_320x250 = Ads::where('ads_zone', 'category_right_widget_320x250')->first();
         $category_top_content_728x90 = Ads::where('ads_zone', 'category_top_content_728x90')->first();
-        return view('frontend.search.index', compact('all', 'cats', 'menus', 'recent3post', 'relatepost', 'category_right_widget_320x250', 'category_top_content_728x90', 'filter' , 'pages'));
+        return view('frontend.search.index', compact('all', 'cats', 'menus', 'recent3post', 'relatepost', 'category_right_widget_320x250', 'category_top_content_728x90', 'filter', 'pages'));
     }
 
-    public function getHashtag(Request $request) {
+    public function getHashtag(Request $request)
+    {
         $filter = $request->get('hashtag');
         $filter = strip_tags(trim(html_entity_decode($filter)));
-        $search = SearchData::where('data',$filter)->first();
+        $search = SearchData::where('data', $filter)->first();
 
         $getHashtag = HashTag::where('hashtag_name', $filter)->first();
         if ($getHashtag == NULL) {
@@ -403,7 +412,8 @@ class PostController extends Controller
         return view('frontend.hashtag.index', compact('posts', 'cat', 'cats', 'menus', 'recent3post', 'relatepost', 'category_right_widget_320x250', 'category_top_content_728x90', 'filter'));
     }
 
-    public function getRelatePost(Request $request) {
+    public function getRelatePost(Request $request)
+    {
         $relatepost = Post::where('cat_id', $request->catID)->where('id', '!=', $request->postID)->inRandomOrder()->take(4)->get();
         return json_decode($relatepost, TRUE);
     }
