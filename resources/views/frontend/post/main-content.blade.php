@@ -24,8 +24,9 @@
             <div class="col-sm-12">
                 <div class="boxdownload-title">Link Download</div>
                 <div class="boxdownload-zone">
+                    <b style="color:red">Hệ thống download đang được bảo trì - Vui lòng yêu cầu download bằng cách nhấn vào chat bên góc phải </b>
                     @foreach($linkdl as $item)
-                        <a target="_blank" href="{{ $item['link'] }}"><span style="background-color: {{ getRandomColor() }};" class="nuttaipost"><i class="fa fa-download"></i>{{ $item['title'] }}</span></a>
+                        <a style="display: none;" target="_blank" href="{{ $item['link'] }}"><span style="background-color: {{ getRandomColor() }};" class="nuttaipost"><i class="fa fa-download"></i>{{ $item['title'] }}</span></a>
                     @endforeach
                 </div>
             </div>
