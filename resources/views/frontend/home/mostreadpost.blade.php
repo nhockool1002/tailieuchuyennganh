@@ -3,9 +3,11 @@
 					<div class="col-md-8">
 						<div class="row">
 						    <br />
-								<div class="fshare-banner" style="width:98%">
-								<a href="#" style="width:98%"><img src="https://placehold.jp/728x90.png" style="width:100%"></a>
-								</div>
+								@if(isset($category_top_content_728x90))
+										<a href="{{ $category_top_content_728x90->target_link }}" style="display: inline-block;margin: auto;">
+												<img class="img-responsive" src="{{ $category_top_content_728x90->ads_img }}" alt="" target="_blank">
+										</a>
+								@endif
 								<br />
 							@for($i = 0; $i < count($random7post); $i++)								
 							<!-- post -->

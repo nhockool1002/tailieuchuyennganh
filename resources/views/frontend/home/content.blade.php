@@ -40,7 +40,7 @@
 
 					<!-- ADNOW -->
 					<div class="addNowAdsAfterHashtag">
-						<!-- <div id="SC_TBlock_874767"></div> -->
+						<div id="SC_TBlock_874767"></div>
 					</div>
 			</div>
 			

@@ -14,9 +14,11 @@
 <div class="post-content">
     {!! $posts->post_content !!}
     <br />
-    <div class="fshare-banner">
-    <a href="#" style="width:100%"><img src="https://placehold.jp/728x90.png" alt="ads after post content" style="width:100%"></a>
-    </div>
+    @if(isset($category_top_content_728x90))
+    <a href="{{ $category_top_content_728x90->target_link }}" style="display: inline-block;margin: auto;">
+        <img class="img-responsive" src="{{ $category_top_content_728x90->ads_img }}" alt="" target="_blank">
+    </a>
+    @endif
     <!-- @include('frontend.post.spoiler') -->
     <hr />
     @if (!empty($linkdl))
@@ -24,9 +26,9 @@
             <div class="col-sm-12">
                 <div class="boxdownload-title">Link Download</div>
                 <div class="boxdownload-zone">
-                    <b style="color:red">Hệ thống download đang được bảo trì - Vui lòng yêu cầu download bằng cách nhấn vào chat bên góc phải </b>
+                    <!-- <b style="color:red">Hệ thống download đang được bảo trì - Vui lòng yêu cầu download bằng cách nhấn vào chat bên góc phải </b> -->
                     @foreach($linkdl as $item)
-                        <a style="display: none;" target="_blank" href="{{ $item['link'] }}"><span style="background-color: {{ getRandomColor() }};" class="nuttaipost"><i class="fa fa-download"></i>{{ $item['title'] }}</span></a>
+                        <a target="_blank" href="{{ $item['link'] }}"><span style="background-color: {{ getRandomColor() }};" class="nuttaipost"><i class="fa fa-download"></i>{{ $item['title'] }}</span></a>
                     @endforeach
                 </div>
             </div>
