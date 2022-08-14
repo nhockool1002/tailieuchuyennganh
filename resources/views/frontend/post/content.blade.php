@@ -34,14 +34,6 @@
 						<!--	{{-- @include('frontend.ads.ads-bottom-post') --}}-->
 						<!--</div>-->
 						<!-- ad -->
-						
-						<!-- author -->
-						<div class="section-row">
-							<div class="post-author">
-								@include('frontend.post.author')
-							</div>
-						</div>
-						<!-- /author -->
 
 						<!-- comments -->
 						<div class="section-row">

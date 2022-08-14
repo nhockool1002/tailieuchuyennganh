@@ -82,11 +82,11 @@
                 <i class="fa fa-times" aria-hidden="true"></i> {{session('warning_mesage')}}
             </div>
         @endif
-        <a href="{{ route('report',['post' => $posts->post_name, 'id' => $posts->id ]) }}" class="btn btn-danger" onclick="return confirm('Chuyển sang báo cáo ?');">Báo cáo link hỏng</a>
-        <a href="https://www.facebook.com/groups/kgroupdocument/" target="_blank" class="btn btn-info">Yêu cầu tài nguyên</a>
+        <a href="{{ route('report',['post' => $posts->post_name, 'id' => $posts->id ]) }}" class="btn btn-danger nmlink" onclick="return confirm('Chuyển sang báo cáo ?');">Báo cáo link hỏng</a>
+        <a href="https://www.facebook.com/groups/kgroupdocument/" target="_blank" class="btn btn-info nmlink">Yêu cầu tài nguyên</a>
     </div>
 </div>
-<div class="sign-content">
+<!-- <div class="sign-content">
     @if(isset($posts->user->sign))
         {!! $posts->user->sign !!}
     @else
@@ -94,5 +94,5 @@
            {!! $settingConfig['signature']['config_setting'] !!}
         @endif
     @endif
-</div>
+</div> -->
 </div>

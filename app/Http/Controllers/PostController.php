@@ -409,7 +409,7 @@ class PostController extends Controller
         $relatepost = Post::orderBy('id', 'asc')->take(3)->get();
         $category_right_widget_320x250 = Ads::where('ads_zone', 'category_right_widget_320x250')->first();
         $category_top_content_728x90 = Ads::where('ads_zone', 'category_top_content_728x90')->first();
-        return view('frontend.hashtag.index', compact('posts', 'cat', 'cats', 'menus', 'recent3post', 'relatepost', 'category_right_widget_320x250', 'category_top_content_728x90', 'filter'));
+        return view('frontend.hashtag.index', compact('posts', 'cats', 'menus', 'recent3post', 'relatepost', 'category_right_widget_320x250', 'category_top_content_728x90', 'filter'));
     }
 
     public function getRelatePost(Request $request)

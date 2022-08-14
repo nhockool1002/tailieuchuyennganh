@@ -4,6 +4,14 @@
 						</div>
 						<!-- /ad -->
 
+						<!-- author -->
+						<div class="section-row">
+							<div class="post-author">
+								@include('frontend.post.author')
+							</div>
+						</div>
+						<!-- /author -->
+
 						<!-- post widget -->
 						<div class="aside-widget">
 							@include('frontend.post.right-widget-post-1')
