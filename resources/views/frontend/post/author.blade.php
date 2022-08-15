@@ -39,7 +39,7 @@
 													style="width:60px; height: 60px; margin: 0 auto; border-radius: 50%"
 												>
 											</div>
-											<div class="col-sm-5">
+											<div class="col-sm-5 userRank">
 												<h4 
 													style="margin: 0; padding: 0; margin-bottom: 0px; font-weight: lighter"
 												>{{ $posts->user->username }}</h4>

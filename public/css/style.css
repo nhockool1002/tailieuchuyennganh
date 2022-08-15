@@ -2107,3 +2107,13 @@ h4.panel-title a {
     background-color: orange;
     transition: .4s ease all;
 }
+
+@media (max-width: 768px) {
+    .userRank {
+        text-align: center;
+        margin: 15px 0;
+    }
+    .userSocial {
+        text-align: center;
+    }
+}
