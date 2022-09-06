@@ -19,7 +19,7 @@ class PostTableSeeder extends Seeder
         	'post_slug' => changeTitle('Angular 5 cho người mới bắt đầu'),
         	'post_content' => $lipsum->paragraphs(20),
             'cat_id' => '2',
-        	'post_img' => 'angular5.png'
+        	'post_img' => 'demo.png'
         ]);
 
         factory(App\Post::class)->create([
@@ -27,7 +27,7 @@ class PostTableSeeder extends Seeder
             'post_slug' => changeTitle('Học và tìm hiểu ngôn ngữ NodeJS'),
             'post_content' => $lipsum->paragraphs(20),
             'cat_id' => '2',
-            'post_img' => 'nodejs.png'
+            'post_img' => 'demo.png'
         ]);
 
         factory(App\Post::class)->create([
@@ -35,7 +35,7 @@ class PostTableSeeder extends Seeder
             'post_slug' => changeTitle('Apachee Spark 2 với Python - Khai thác BigData với PySpark và Spark'),
             'post_content' => $lipsum->paragraphs(20),
             'cat_id' => '2',
-            'post_img' => 'pypark.png'
+            'post_img' => 'demo.png'
         ]);
 
         factory(App\Post::class)->create([
@@ -43,7 +43,7 @@ class PostTableSeeder extends Seeder
             'post_slug' => changeTitle('Xây dựng ứng dụng theo mô hình MVC bằng Spring Framework'),
             'post_content' => $lipsum->paragraphs(20),
             'cat_id' => '2',
-            'post_img' => 'springmvc.png'
+            'post_img' => 'demo.png'
         ]);
 
         factory(App\Post::class)->create([
@@ -51,7 +51,7 @@ class PostTableSeeder extends Seeder
             'post_slug' => changeTitle('Học Typescript Async Await trong NodeJS bằng Testing'),
             'post_content' => $lipsum->paragraphs(20),
             'cat_id' => '2',
-            'post_img' => 'typescript.png'
+            'post_img' => 'demo.png'
         ]);
 
         factory(App\Post::class)->create([
@@ -59,7 +59,7 @@ class PostTableSeeder extends Seeder
             'post_slug' => changeTitle('Sách học Arduino cho người mới bắt đầu'),
             'post_content' => $lipsum->paragraphs(20),
             'cat_id' => '1',
-            'post_img' => 'arduino.png'
+            'post_img' => 'demo.png'
         ]);
 
         factory(App\Post::class)->create([
@@ -67,7 +67,7 @@ class PostTableSeeder extends Seeder
             'post_slug' => changeTitle('10 bước bắt đầu với Google Adwords bạn phải biết'),
             'post_content' => $lipsum->paragraphs(20),
             'cat_id' => '4',
-            'post_img' => '10buocadw.png'
+            'post_img' => 'demo.png'
         ]);
     }
 }
