@@ -153,3 +153,15 @@ $(function() {
     });
 });
 
+function confirmRobot() {
+	let response = prompt("Do the following calculation: (26x26+12 = ?)", "0");
+	if (response == null || response == "" || response == "0") {
+    alert("Where accurate results are required, do not leave blank.");
+		return false;
+  } else {
+    if (response == "688") {
+			return true;
+		}
+		return false;
+  }
+}

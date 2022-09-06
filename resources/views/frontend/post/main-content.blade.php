@@ -82,7 +82,7 @@
                 <i class="fa fa-times" aria-hidden="true"></i> {{session('warning_mesage')}}
             </div>
         @endif
-        <a href="{{ route('report',['post' => $posts->post_name, 'id' => $posts->id ]) }}" class="btn btn-danger nmlink" onclick="return confirm('Chuyển sang báo cáo ?');">Báo cáo link hỏng</a>
+        <a href="{{ route('report',['post' => $posts->post_name, 'id' => $posts->id ]) }}" class="btn btn-danger nmlink" onclick="confirmRobot()">Báo cáo link hỏng</a>
         <a href="https://www.facebook.com/groups/kgroupdocument/" target="_blank" class="btn btn-info nmlink">Yêu cầu tài nguyên</a>
     </div>
 </div>
