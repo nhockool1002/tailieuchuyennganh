@@ -31,6 +31,10 @@ RESPONSIVE
 /*----------------------------*\
 	typography
 \*----------------------------*/
+html {
+    scroll-behavior: smooth;
+},
+
 body {
     font-family: "Saira Extra Condensed", sans-serif;
     font-size: 16px;
@@ -550,6 +554,10 @@ textarea.input {
 }
 .post .post-img > img {
     width: 100%;
+}
+
+.recent-post img {
+    border-radius: 10px;
 }
 
 .post.category .post-img > img {
@@ -2110,6 +2118,19 @@ h4.panel-title a {
 .userSocial .author-social li > a:hover {
     background-color: orange;
     transition: .4s ease all;
+}
+
+.alert.alert-danger.box-notice {
+    background-color: #ffe5ea;
+}
+
+.alert.alert-danger.box-notice p {
+    color: red;
+}
+
+.alert.alert-danger.box-notice p {
+    color: #3a5b2e;
+    font-weight: 400;
 }
 
 @media (max-width: 768px) {

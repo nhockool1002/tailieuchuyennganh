@@ -25,3 +25,6 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 **/.DS_Store
+
+/public/ckfinder/**
+/public/upload/

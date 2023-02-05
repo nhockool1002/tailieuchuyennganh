@@ -22,6 +22,10 @@
     <!-- @include('frontend.post.spoiler') -->
     <hr />
     @if (!empty($linkdl))
+    <div class="alert alert-danger box-notice">
+        <p>Hiện tại TÀI LIỆU CHUYÊN NGÀNH đã hổ trợ toàn bộ liên kết download với <b>TỐC ĐỘ CAO - KHÔNG QUẢNG CÁO</b>.</p>
+        <p>Để nhận liên kết tải về <b>TỐC ĐỘ CAO</b> cho bài viết này, vui lòng xem hướng dẫn <a target="_blank" href="https://tailieuchuyennganh.com/page/6/huong-dan-nhan-link-tai-toc-do-cao">TẠI ĐÂY</a></p>
+    </div>
     <div class="row">
             <div class="col-sm-12">
                 <div class="boxdownload-title">Link Download</div>
