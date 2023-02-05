@@ -7,7 +7,7 @@
 					</div>
 					@foreach($recent3post1 as $post)
 					<!-- post -->
-					<div class="col-md-4">
+					<div class="col-md-4 recent-post">
 						<div class="post">
 							<a class="post-img" href="{{ route('getPost', ['id' => $post->id, 'slug' => $post->post_slug ]) }}"><img class="h40" src="{{ \Constant::IMAGE_THUMB_POST }}/{{ $post->post_img }}" alt="{{ $post->post_slug }}"></a>
 							<div class="post-body">
@@ -25,7 +25,7 @@
 
 					@foreach($recent3post2 as $post)
 					<!-- post -->
-					<div class="col-md-4">
+					<div class="col-md-4 recent-post">
 						<div class="post">
 							<a class="post-img" href="{{ route('getPost', ['id' => $post->id, 'slug' => $post->post_slug ]) }}"><img class="h40" src="{{ \Constant::IMAGE_THUMB_POST }}/{{ $post->post_img }}" alt="{{ $post->post_slug }}"></a>
 							<div class="post-body">
