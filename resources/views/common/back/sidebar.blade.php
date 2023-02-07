@@ -82,7 +82,7 @@
                 @if(Auth::user()->role_id ==1 || Auth::user()->role_id ==2)
                 <li {{{ (Request::is('backend/pokemon*') ? 'class=active' : '') }}}>
                     <a href="{{ route('indexViewPokemon') }}">
-                        <i class="ti-settings"></i>
+                        <i class="ti-medall"></i>
                         <p>Pokemon Controller</p>
                     </a>
                 </li>
