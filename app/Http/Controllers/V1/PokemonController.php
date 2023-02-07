@@ -57,7 +57,9 @@ class PokemonController extends Controller
      */
     public function show($id)
     {
-        //
+        $pkm = Pokemon::find($id);
+
+        return response()->json($pkm);
     }
 
     /**
