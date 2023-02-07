@@ -212,6 +212,21 @@ Route::group(['prefix' => 'backend', 'middleware' => ['checklogin', 'checkunderc
         Route::get('delete-requestHD/{id}', 'SettingController@deleteRequestHD')->name('delete-requestHD')->middleware('checkmod');
     });
 
+    Route::group(['prefix' => 'pokemon', 'middleware' => 'checkadmin'], function () {
+        Route::get('', 'V1\PokemonController@indexView')->name('indexViewPokemon');
+        Route::get('add', 'V1\PokemonController@addView')->name('addViewPokemon');
+        Route::post('add-submit', 'V1\PokemonController@addSubmit')->name('addSubmit');
+        Route::get('edit/{id}', 'V1\PokemonController@editView')
+            ->where(['id' => '[0-9]+'])
+            ->name('editViewPokemon');
+        Route::post('edit/{id}', 'V1\PokemonController@editSubmit')
+            ->where(['id' => '[0-9]+'])
+            ->name('editSubmit');
+        Route::get('delete/{id}', 'V1\PokemonController@deleteRom')
+            ->where(['id' => '[0-9]+'])
+            ->name('deleteRom');
+    });
+
     Route::group(['prefix' => 'log', 'middleware' => 'checkadmin'], function () {
         Route::get('', 'LogController@getAll')->name('log');
         Route::get('deleteAllLog', 'LogController@deleteAllLog')->name('deleteAllLog');

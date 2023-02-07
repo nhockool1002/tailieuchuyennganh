@@ -26,5 +26,5 @@ Homestead.json
 .phpunit.result.cache
 **/.DS_Store
 
-/public/ckfinder/**
+/public/ckfinder/
 /public/upload/
