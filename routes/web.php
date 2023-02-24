@@ -52,7 +52,7 @@ Route::group(['prefix' => '/', 'middleware' => 'checkunderconstruct'], function 
     });
 });
 
-Route::group(['prefix' => 'backend', 'middleware' => ['checklogin', 'checkunderconstruct']], function () {
+Route::group(['prefix' => 'backend', 'middleware' => ['role:super-admin', 'checklogin', 'checkunderconstruct']], function () {
     Route::get('', function () {
         return view('backend.dashboard.index');
     })->name('dashboard');

@@ -64,6 +64,9 @@ class Kernel extends HttpKernel
         'countviewpost' => \App\Http\Middleware\Countviewpost::class,
         'checkadmin' => \App\Http\Middleware\CheckAdmin::class,
         'checkmod' => \App\Http\Middleware\CheckModerator::class,
-        'checkunderconstruct' => \App\Http\Middleware\CheckUnderContruct::class
+        'checkunderconstruct' => \App\Http\Middleware\CheckUnderContruct::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
     ];
 }
