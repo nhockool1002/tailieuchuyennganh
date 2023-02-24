@@ -74,6 +74,28 @@
 		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 		<script src="{{ asset('js/main.js') }}"></script>
 		<script src="{{ asset('js/particles.js') }}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+		<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+        <script>
+            hljs.initHighlightingOnLoad();
+            hljs.addPlugin(new CopyButtonPlugin());
+            var jsQuery = $('.jsQuery');
+            var phpQuery = $('.phpQuery');
+            var pythonQuery = $('.pythonQuery');
+            jsQuery.each(function(index, obj) {
+                const el = $(obj);
+                el.parent().addClass("box-view-wrapper");
+                el.html(`<div class="box-code-view"><pre><code class="language-javascript">${el.text()}</code></pre></div>`);
+            });
+            phpQuery.each(function(index, obj) {
+                const el = $(obj);
+                el.html(`<div class="box-code-view"><pre><code class="language-php">${el.text()}</code></pre></div>`);
+            });
+            pythonQuery.each(function(index, obj) {
+                const el = $(obj);
+                el.html(`<div class="box-code-view"><pre><code class="language-python">${el.text()}</code></pre></div>`);
+            });
+        </script>
 		@stack('scripts')
 	</body>	
 </html>

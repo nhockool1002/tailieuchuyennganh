@@ -131,4 +131,10 @@
 
         gtag('config', 'G-2H9DSPYYN6');
         </script>
+        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/srcery.min.css">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/panda-syntax-dark.min.css">
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"
+        />
     </head>

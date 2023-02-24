@@ -7,6 +7,6 @@
 	<script src="{{ asset('login-assets/vendor/select2/select2.min.js') }}"></script>
 <!--===============================================================================================-->
 	<script src="{{ asset('login-assets/js/main.js') }}"></script>
-
+	@stack('scripts')
 </body>
 </html>

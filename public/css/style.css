@@ -1602,6 +1602,7 @@ td.name_td {
 
 .post-content ul li {
     position: relative;
+    display: flex;
 }
 
 .post-content ul li:before {
@@ -2131,6 +2132,11 @@ h4.panel-title a {
 .alert.alert-danger.box-notice p {
     color: #3a5b2e;
     font-weight: 400;
+}
+
+.container-fluid.box-view-wrapper {
+    padding-right: 0;
+    padding-left: 0;
 }
 
 @media (max-width: 768px) {

@@ -1,10 +1,10 @@
 @extends('backend.back_layouts')
 @section('headname')
-	Edit Post
+	Add Pokemon Rom
 @endsection
 @section('content')
-	@include('backend.post.edit-content')
-    @push('scripts')
+	@include('backend.pokemon.edit-content')
+  @push('scripts')
         <!-- CKEditor -->
         <script type="text/javascript">
             window.onbeforeunload = function() {
@@ -12,49 +12,14 @@
             };
         </script>
         <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-        <script> 
-        let editor = CKEDITOR.replace( 'editor1', {
+        <script> CKEDITOR.replace( 'editor1', {
                 filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
                 filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
                 filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
                 filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
                 filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
                 filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
-            } ); 
-            editor.addCommand('jsCommand', {
-                exec: function(et) {
-                    et.insertHtml('<div class="jsQuery"></div>');
-                }
-            })
-            editor.ui.addButton('addJSCommand', {
-                label: 'Add JS Block',
-                command: 'jsCommand',
-                toolbar: 'insert',
-                icon: '../img/js.png',
-            })
-            editor.addCommand('phpCommand', {
-                exec: function(et) {
-                    et.insertHtml('<div class="phpQuery"></div>');
-                }
-            })
-            editor.ui.addButton('addPHPCommand', {
-                label: 'Add PHP Block',
-                command: 'phpCommand',
-                toolbar: 'insert',
-                icon: '../img/php.png',
-            })
-            editor.addCommand('pythonCommand', {
-                exec: function(et) {
-                    et.insertHtml('<div class="pythonQuery"></div>');
-                }
-            })
-            editor.ui.addButton('addPythonCommand', {
-                label: 'Add Python Block',
-                command: 'pythonCommand',
-                toolbar: 'insert',
-                icon: '../img/py.png',
-            })
-        </script>
+            } ); </script>
 
         <!-- Import typeahead.js -->
         <script src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
@@ -131,15 +96,6 @@
                var elHashTag = $(".hashtag-"+data);
                elHashTag.remove();
             }
-            function removeHTADD(data, id){
-                $.ajax({
-                    type: 'GET',
-                    url : '{{ route('removeHashTag') }}',
-                    data : {postID:id, hashtagID:data}
-                });
-                var elHashTag = $(".hashtagged-"+data);
-                elHashTag.remove();
-            }
 
             function addDLzone(){
                 var zonebox = $("#datadownload");
@@ -150,11 +106,6 @@
 
             function removeDLB(data) {
                 var elHashTag = $(".downloaded-"+data);
-                elHashTag.remove();
-            }
-
-            function removeDLBK(data) {
-                var elHashTag = $(".box-cr-"+data);
                 elHashTag.remove();
             }
         </script>

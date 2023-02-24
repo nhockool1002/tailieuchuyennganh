@@ -1,5 +1,6 @@
 <?php
 
+use App\Pokemon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PageTableSeeder::class);
         $this->call(AdsSeeder::class);
         $this->call(SettingSeeder::class);
+        factory(Pokemon::class, 100)->create();
     }
 }

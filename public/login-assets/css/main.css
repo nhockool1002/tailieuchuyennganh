@@ -509,6 +509,21 @@ iframe {
   opacity: 1;
 }
 
+#timer {
+  font-size: 30px;
+  font-weight: bold;
+  color: red;
+}
+
+#timer .btn-redirect {
+  color: white;
+  font-weight: bolder;
+}
+
+#timer .btn-redirect:hover {
+  cursor: pointer;
+}
+
 @media (max-width: 992px) {
   .alert-validate::before {
     visibility: visible;
