@@ -362,8 +362,9 @@ class PostController extends Controller
         $bottom_post_728x90 = Ads::where('ads_zone', 'bottom_post_728x90')->first();
         $bottom_right_widget_post_320x250 = Ads::where('ads_zone', 'bottom_right_widget_post_320x250')->first();
         $category_top_content_728x90 = Ads::where('ads_zone', 'category_top_content_728x90')->first();
-        $userTpoint = UserTpoint::where('user_id', auth()->user()->id)->first();
-        $tpoint = $userTpoint ? $userTpoint->tpoint : 0.000;
+        // $userTpoint = UserTpoint::where('user_id', auth()->user()->id)->first();
+        // $tpoint = $userTpoint ? $userTpoint->tpoint : 0.000;
+        $tpoint = 0;
 
         return view('frontend.post.index', compact('posts', 'cats', 'menus', 'recent3post', 'relatepost', 'randompost', 'bottom_post_728x90', 'bottom_right_widget_post_320x250', 'social', 'hashtags', 'linkdl', 'category_top_content_728x90', 'tpoint'));
     }
