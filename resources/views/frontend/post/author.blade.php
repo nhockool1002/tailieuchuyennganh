@@ -45,7 +45,7 @@
 												>{{ $posts->user->username }}</h4>
 												<h6
 													style="margin: 0; padding: 0; margin-bottom: 5px; color: green;"
-												>Uploader</h6>
+												>{{ $posts->user->getRoleNames()[0] }}</h6>
 												<img 
 													src="{{ asset('rank/uploader.jpg') }}"
 													style="width: 100px; height: auto; box-shadow: 2px 4px 4px #000000a1;" 
@@ -53,8 +53,8 @@
 												/>
 											</div>
 											<div class="col-sm-4 userSocial">
-												<span class="titleUserWg">Bài viết:</span> <span class="contentUserWg">100</span><br />
-												<span class="titleUserWg">TLC$:</span> <span class="contentUserWg">100,00</span><br />
+												<span class="titleUserWg">Bài viết:</span> <span class="contentUserWg">{{ $posts->user->countPosts() }}</span><br />
+												<span class="titleUserWg">TPoint$:</span> <span class="contentUserWg">{{ number_format($tpoint, 0, ',', '.') }}</span><br />
 												<ul class="author-social">
 													@if(isset($settingConfig['sc']['facebook']))
 													<li><a href="{{ $settingConfig['sc']['facebook'] }}" target="_blank"><i class="fa fa-facebook"></i></a></li>

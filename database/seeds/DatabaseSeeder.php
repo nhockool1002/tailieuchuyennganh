@@ -2,6 +2,7 @@
 
 use App\Pokemon;
 use App\User;
+use App\UserTpoint;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -33,5 +34,6 @@ class DatabaseSeeder extends Seeder
 
         $user = User::find(1);
         $user->assignRole('super-admin');
+        UserTpoint::create(['user_id' => '1', 'tpoint' => '100000']);
     }
 }

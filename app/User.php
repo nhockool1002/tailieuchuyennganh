@@ -35,6 +35,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Post', 'user_id', 'id');
     }
 
+    public function countPosts()
+    {
+        return $this->post()->count();
+    }
+
     public function page()
     {
         return $this->hasMany('App\Page', 'user_id', 'id');
