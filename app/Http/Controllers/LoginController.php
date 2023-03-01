@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
+use App\User;
+use App\UserTpoint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
 use Auth;
-use App\Log; 
+use App\Log;
 use Illuminate\Support\MessageBag;
+use Exception;
+use DB;
 
 class LoginController extends Controller
 {
@@ -41,8 +46,11 @@ class LoginController extends Controller
                 $log->user = Auth::user()->username;
                 $log->screen = \Constant::LOGIN_USER_FUNCTION;
                 $log->save();
-
-    			return redirect()->intended('/backend');
+                if (Auth::user()->hasRole('super-admin|admin')) {
+                    return redirect()->intended('/backend');
+                } else {
+                    return redirect()->route('home');
+                }
     		} else {
     			$errors = new MessageBag(['errorlogin' => 'Username hoặc mật khẩu không đúng']);
     			return redirect()->back()->withInput()->withErrors($errors);
@@ -59,6 +67,33 @@ class LoginController extends Controller
             $log->save();
             Auth::logout();
             return redirect(route('getLogin'))->with('success_mesage','Logout successfully');
+        }
+    }
+
+    public function getRegister() {
+        if(Auth::check()) {
+            return redirect(route('home'));
+        }
+        return view('register.register');
+    }
+
+    public function postRegister(RegisterRequest $request) {
+        try {
+            DB::beginTransaction();
+            $user = new User();
+            $user->username = $request->username;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->role_id = '3';
+            $user->service_shortlink_id = '6';
+            $user->save();
+            $user->assignRole('member');
+            UserTpoint::create(['user_id' => $user->id, 'tpoint' => '0']);
+            DB::commit();
+            return redirect()->route('getLogin')->with('success_mesage', 'Đăng kí thành công !!');
+        } catch (Exception $e) {
+            DB::rollBack();
+            return back()->with('failed_mesage', $e->getMessage());
         }
     }
 }

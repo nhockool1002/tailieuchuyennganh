@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 		@if (strpos(url()->current(), 'post'))
         <title>{{ $posts->post_name }}</title>
         @elseif (strpos(url()->current(), 'category'))
@@ -21,18 +21,18 @@
         }
         @endphp
 
-        @if (strpos(url()->current(), 'post'))        
+        @if (strpos(url()->current(), 'post'))
         <meta name="description" content="{{ $desc }}" />
         @else
         <meta name="description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data." />
         @endif
-		
+
 		<meta content='blogger' name='generator'/>
 
         <!-- Schema.org markup for Google+ -->
         <meta itemprop="name" content="@stack('postname') {{ \Constant::TITLE_NAME }}">
-        
-        @if (strpos(url()->current(), 'post'))        
+
+        @if (strpos(url()->current(), 'post'))
         <meta itemprop="description" content="{{ $desc }}">
         @else
         <meta itemprop="description" content="Tài liệu chuyên ngành - Cộng đồng chia sẻ tài nguyên miễn phí tất tần tật các lĩnh vực, bao gồm CNTT - GAMES - ĐỒ HOẠ - DATA SCIENCE - Big Data.">
@@ -44,7 +44,7 @@
         @else
         <meta property="og:image" content="https://tailieuchuyennganh.com/img/banner1.jpg">
         @endif
-        
+
 
         <!-- Twitter Card data -->
         <meta name="twitter:card" content="summary_large_image">
@@ -112,7 +112,10 @@
 		<!-- Font Awesome Icon -->
 		<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
 
-		<!-- Custom stlylesheet -->
+        <!-- toastr -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
+        <!-- Custom stlylesheet -->
 		<link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"/>
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -137,4 +140,12 @@
           rel="stylesheet"
           href="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.css"
         />
+        <script src="{{ asset('tinymce/js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+        <script>tinymce.init(
+            {
+                selector:'textarea#__message_user_cp',
+                toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
+                height: 250,
+            });
+        </script>
     </head>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\UserTpoint;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 use Auth;
 use File;
@@ -112,7 +112,7 @@ class PageController extends Controller
     {
         $page = Page::find($id);
         File::delete('upload/pages/images/'.$page->page_img);
-        
+
         $log = new Log();
         $log->changelog = 'Delete Page  ' . '<b><font color="red">' . $page->page_name . '</font></b>';
         $log->user = Auth::user()->username;
@@ -148,6 +148,8 @@ class PageController extends Controller
         $randompost = Post::inRandomOrder()->take(2)->get();
         $bottom_post_728x90 = Ads::where('ads_zone', 'bottom_post_728x90')->first();
         $bottom_right_widget_post_320x250 = Ads::where('ads_zone', 'bottom_right_widget_post_320x250')->first();
-        return view('frontend.page.index', compact('pages', 'cats', 'menus', 'recent3post', 'relatepost' , 'randompost', 'bottom_post_728x90' ,'bottom_right_widget_post_320x250', 'social'));
+        $userTpoint = UserTpoint::where('user_id', $pages->user_id)->first();
+        $tpoint = $userTpoint ? $userTpoint->tpoint : 0.000;
+        return view('frontend.page.index', compact('pages', 'cats', 'menus', 'recent3post', 'relatepost' , 'randompost', 'bottom_post_728x90' ,'bottom_right_widget_post_320x250', 'social', 'tpoint'));
     }
 }

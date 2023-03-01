@@ -6,8 +6,8 @@
 		<body>
 			@endif
 			<!-- Facebook Page plugin -->
-			<div id="fb-root"></div>
-			<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=513881545829406&autoLogAppEvents=1" nonce="c0hE2YYl"></script>
+            <!--<div id="fb-root"></div>-->
+            <!--<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=513881545829406&autoLogAppEvents=1" nonce="c0hE2YYl"></script>-->
 			<!-- Messenger Chat Plugin Code -->
 
 			<!-- Your Chat Plugin code -->

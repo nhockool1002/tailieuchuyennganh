@@ -8,7 +8,7 @@
 					</div>
 
 					<span class="login100-form-title p-t-20 p-b-45">
-						XShare Administrator Login
+						ĐĂNG NHẬP TÀI LIỆU CHUYÊN NGÀNH
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-10" data-validate = "Username is required">
@@ -56,9 +56,9 @@
 					</div>
 
 					<div class="text-center w-full">
-						<a class="txt1" href="#">
+                        <a class="txt1" href="{{ route('getRegister') }}">
 							Tạo tài khoản
-							<i class="fa fa-long-arrow-right"></i>						
+							<i class="fa fa-long-arrow-right"></i>
 						</a>
 					</div>
 				</form>

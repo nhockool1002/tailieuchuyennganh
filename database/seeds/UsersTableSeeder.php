@@ -28,6 +28,6 @@ class UsersTableSeeder extends Seeder
             'role_id' => '2'
         ]);
 
-        factory(App\User::class, 30)->create();
+    //        factory(App\User::class, 30)->create();
     }
 }

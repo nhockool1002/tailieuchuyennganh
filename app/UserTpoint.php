@@ -19,7 +19,7 @@ class UserTpoint extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function addScore($points)
+    public function addTpoint($points)
     {
         $this->tpoint += $points;
         $this->save();

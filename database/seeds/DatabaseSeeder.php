@@ -34,6 +34,9 @@ class DatabaseSeeder extends Seeder
 
         $user = User::find(1);
         $user->assignRole('super-admin');
+        $user = User::find(2);
+        $user->assignRole('member');
         UserTpoint::create(['user_id' => '1', 'tpoint' => '100000']);
+        UserTpoint::create(['user_id' => '2', 'tpoint' => '0']);
     }
 }

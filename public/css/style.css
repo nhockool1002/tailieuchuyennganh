@@ -1,6 +1,6 @@
 /* @import url('https://fonts.googleapis.com/css?family=Arima+Madurai:100,200,300,400,500,700,800,900&display=swap&subset=vietnamese'); */
 
-/* 
+/*
 Template Name: WebMag Html Template
 
 Author: yaminncco
@@ -2137,6 +2137,261 @@ h4.panel-title a {
 .container-fluid.box-view-wrapper {
     padding-right: 0;
     padding-left: 0;
+}
+
+.like-box {
+    width: 100%;
+}
+
+.like-box .not-thank {
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #dddddd;
+    border-radius: 10px;
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.like-box .thanked {
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #dddddd;
+    border-radius: 10px;
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.like-box .not-thank:hover {
+    cursor: pointer;
+}
+
+.like-box .thanked:hover {
+    cursor: pointer;
+}
+
+.like-box .not-thank .icon {
+    width: 20%;
+    text-align: center;
+    padding-left: 6px;
+}
+
+.like-box .thanked .icon {
+    width: 20%;
+    text-align: center;
+    padding-left: 6px;
+}
+
+.like-box .not-thank .content-thank {
+    width: 80%;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: blueviolet;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.like-box .not-thank:hover .content-thank {
+    background-color: forestgreen;
+    transition: .4s ease all;
+}
+
+.like-box .thanked .content-thank {
+    width: 80%;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: red;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.like-box .not-thank .icon img {
+    width: 60%;
+}
+
+.like-box .thanked .icon img {
+    width: 60%;
+}
+
+.post-content .box-say-thank a {
+    animation: unset;
+    animation-iteration-count: unset;
+    font-weight: 300;
+    color: #11112f;
+}
+
+.view-profile {
+    font-weight: 400;
+    color: #0C7FCC;
+    font-style: italic;
+}
+.user_cp {
+    margin-top: 30px;
+}
+.avatar-image {
+    background-color: #e0dad1;
+    padding: 20px;
+    border-radius: 10px;
+}
+.user_cp_setting {
+    margin-top: 20px;
+    color: white;
+    background-image: linear-gradient(to right, rgb(48 44 179), rgba(255,0,0,1));
+    height: 40px;
+    line-height: 40px;
+    padding-left: 20px;
+    font-weight: 600;
+    border-left: 1px solid rgb(48 44 179);
+    border-right: 1px solid rgba(255,0,0,1);
+}
+
+.user_cp_setting_items {
+    background-color: rgb(179 179 179 / 15%);
+    height: 30px;
+    line-height: 30px;
+    padding-left: 20px;
+    border-left: 1px solid rgb(48 44 179);
+    border-right: 1px solid rgba(255,0,0,1);
+    transition: .7s ease all;
+}
+
+.user_cp_divide_items {
+    height: 1px;
+    background-image: linear-gradient(to right, rgb(48 44 179), rgba(255,0,0,1));
+    border-left: 1px solid rgb(48 44 179);
+    border-right: 1px solid rgba(255,0,0,1);
+}
+
+.user_cp_bottom_items {
+    height: 1px;
+    background-color: #5b4f431a;
+    border-left: 1px solid rgb(48 44 179);
+    border-right: 1px solid rgba(255,0,0,1);
+}
+
+.usercp_alink_items {
+    display: block;
+    width: 100%;
+    font-weight: 500;
+}
+
+.usercp_alink_items:hover {
+    cursor: pointer;
+}
+
+.usercp_alink_items:hover .user_cp_setting_items {
+    padding-left: 25px;
+    background-color: #a3dbf6;
+    color: white;
+    cursor: pointer;
+}
+
+.list_user_cp_info {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+    padding: 3px;
+    border-radius: 3px;
+    background-color: rgba(224, 224, 224, 0.38);
+}
+
+.list_user_cp_info p {
+    margin: 0px 0px 0px;
+}
+
+.item__title {
+    font-weight: bold;
+}
+
+.item__title .info_items {
+    font-weight: lighter;
+    font-size: 15px;
+    color: #0f2526;
+}
+
+.user_info__items {
+    color: red;
+    font-size: 18px;
+    font-weight: bolder;
+    margin-top: 5px !important;
+}
+
+.user_info__items span {
+    color: #0c5460;
+}
+
+.user_info_email_items {
+    font-size: 12px;
+    font-weight: bolder;
+    margin-bottom: 5px !important;
+}
+
+.__message_user_cp {
+    height: 40px;
+}
+
+.send__msg {
+    margin-top: 15px;
+}
+
+.user_comments_items {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user_comments_img {
+    width: 10%;
+    padding: 10px;
+}
+
+.user_comments_img img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.user_comments_content {
+    width: 70%;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: justify;
+}
+
+.user_comments_time {
+    width: 20%;
+    align-self: center;
+    justify-self: center;
+}
+
+.comments_main_content {
+    background-color: #eaeaea;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.delete_comments {
+    width: 100%;
+    text-align: right;
+}
+
+.delete_comments button {
+    color: red;
+    transition: .5s all ease-out;
+}
+
+.delete_comments button:hover {
+    color: white;
+    background-color: red;
 }
 
 @media (max-width: 768px) {

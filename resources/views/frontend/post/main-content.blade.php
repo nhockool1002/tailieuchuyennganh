@@ -14,11 +14,46 @@
 <div class="post-content">
     {!! $posts->post_content !!}
     <br />
+    @if($user_has_like === 0)
+        <div class="w-100 like-box">
+            <div class="not-thank" data-post-id="{{ $posts->id }}">
+                <span class="icon">
+                    <img src="{{ asset('img/like.png') }}" />
+                </span>
+                <span class="content-thank">THANK POST</span>
+            </div>
+        </div>
+    @elseif($user_has_like === 1)
+        <div class="w-100 like-box">
+            <div class="thanked" data-post-id="{{ $posts->id }}">
+                <span class="icon">
+                    <img src="{{ asset('img/like.png') }}" />
+                </span>
+                <span class="content-thank">YOU THANKED</span>
+            </div>
+        </div>
+    @endif
+    <br />
     @if(isset($category_top_content_728x90))
     <a href="{{ $category_top_content_728x90->target_link }}" style="display: inline-block;margin: auto;">
         <img class="img-responsive" src="{{ $category_top_content_728x90->ads_img }}" alt="" target="_blank">
     </a>
     @endif
+    @if($likedUsers && count($likedUsers) >= 0)
+    <hr />
+    <h4 class="people-say-thank">Các thành viên đã like bài viết: </h4>
+    @endif
+    <div class="box-say-thank">
+        @if($likedUsers && count($likedUsers) >= 0)
+            @foreach($likedUsers as $user)
+                @if(!$loop->last)
+                    <a href="#">{{ $user->username }}</a>,
+                @else
+                    <a href="#">{{ $user->username }}</a>
+                @endif
+            @endforeach
+        @endif
+    </div>
     <!-- @include('frontend.post.spoiler') -->
     <hr />
     @if (!empty($linkdl))

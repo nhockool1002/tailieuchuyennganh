@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\UserTpointLog;
 use Illuminate\Http\Request;
 use App\Post;
 use File;
 use Auth;
+use DB;
+use Exception;
 use App\Menu;
 use App\Log;
 use App\Ads;
@@ -18,8 +21,10 @@ use App\Moderator;
 use App\HashTag;
 use App\PostHashTag;
 use App\UserTpoint;
+use App\Like;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Response;
 
 class PostController extends Controller
 {
@@ -362,11 +367,20 @@ class PostController extends Controller
         $bottom_post_728x90 = Ads::where('ads_zone', 'bottom_post_728x90')->first();
         $bottom_right_widget_post_320x250 = Ads::where('ads_zone', 'bottom_right_widget_post_320x250')->first();
         $category_top_content_728x90 = Ads::where('ads_zone', 'category_top_content_728x90')->first();
-        // $userTpoint = UserTpoint::where('user_id', auth()->user()->id)->first();
-        // $tpoint = $userTpoint ? $userTpoint->tpoint : 0.000;
-        $tpoint = 0;
 
-        return view('frontend.post.index', compact('posts', 'cats', 'menus', 'recent3post', 'relatepost', 'randompost', 'bottom_post_728x90', 'bottom_right_widget_post_320x250', 'social', 'hashtags', 'linkdl', 'category_top_content_728x90', 'tpoint'));
+        $user = Auth::user();
+        $user_has_like = 0;
+        $tpoint = 0.000;
+        if ($user) {
+            $liked = $user->hasLikedPost($posts);
+            if ($liked) {
+                $user_has_like = 1;
+            }
+            $userTpoint = UserTpoint::where('user_id', $user->id)->first();
+            $tpoint = $userTpoint ? $userTpoint->tpoint : 0.000;
+        }
+        $likedUsers = $posts->likes->pluck('user');
+        return view('frontend.post.index', compact('posts', 'cats', 'menus', 'recent3post', 'relatepost', 'randompost', 'bottom_post_728x90', 'bottom_right_widget_post_320x250', 'social', 'hashtags', 'linkdl', 'category_top_content_728x90', 'tpoint', 'user_has_like', 'likedUsers', 'user'));
     }
 
     public function getSearch(Request $request)
@@ -420,5 +434,58 @@ class PostController extends Controller
     {
         $relatepost = Post::where('cat_id', $request->catID)->where('id', '!=', $request->postID)->inRandomOrder()->take(4)->get();
         return json_decode($relatepost, TRUE);
+    }
+
+    public function like(Request $request)
+    {
+        $user = Auth::user();
+        if (!$user) {
+            return response()->json(['message' => 'not_login'], 400);
+        }
+        $user_id = Auth::user()->id; // Lấy ID của user hiện tại
+        $post_id = $request->post_id; // Lấy ID của bài viết được like
+
+        $post = Post::find($post_id); // Tìm bài viết
+
+        // Kiểm tra xem user đã like bài viết chưa
+        if ($post->likes()->where('user_id', $user_id)->exists()) {
+            return response()->json(['message' => 'like_duplicate'], 400);
+        }
+
+        try {
+            DB::beginTransaction();
+            $like = new Like();
+            $like->user_id = $user_id;
+            $post->likes()->save($like);
+
+            $likedUsers = $post->likes->pluck('user');
+
+            $list = '';
+            if ($likedUsers && count($likedUsers) >= 0) {
+                $lastUser = $likedUsers->last();
+                foreach ($likedUsers as $u) {
+                    if ($lastUser->username !== $u->username) {
+                        $list .= '<a href="#">'. $u->username .'</a>, ';
+                    } else {
+                        $list .= '<a href="#">'. $u->username .'</a>';
+                    }
+                }
+            }
+
+            $userPoint = UserTpoint::where('user_id', $user_id)->first();
+            $userPoint->addTpoint(0.5);
+
+            $userTpointLog = new UserTpointLog();
+            $userTpointLog->user_id = $user_id;
+            $userTpointLog->content = "THANK POST #". $post_id;
+            $userTpointLog->amount = 0.5;
+            $userTpointLog->status = "IN";
+            $userTpointLog->save();
+            DB::commit();
+            return response()->json(['message' => 'like_success', 'list' => $list], 200);
+        } catch (Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'like_failed'], 400);
+        }
     }
 }

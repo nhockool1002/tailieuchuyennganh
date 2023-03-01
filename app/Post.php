@@ -27,4 +27,9 @@ class Post extends Model
     {
         return $this->hasOne('App\DownloadPost', 'post_id', 'id');
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileCommentsRequest;
+use App\ProfileComments;
+use App\User;
+use App\UserTpoint;
 use Illuminate\Http\Request;
 use App\Menu;
 use App\Post;
 use App\Ads;
 use App\Category;
 use App\Setting;
+use App\Like;
 use App\DonateListCourse;
+use Auth;
+use DB;
+use Exception;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
@@ -52,5 +60,72 @@ class HomeController extends Controller
             $notice = $notice->config_setting;
         }
         return view('frontend.donate.index', compact('courses', 'notice', 'cats', 'menus', 'recent3post', 'relatepost', 'category_right_widget_320x250', 'category_top_content_728x90'));
+    }
+
+    public function usercpPage($id) {
+        $menus = Menu::all();
+        $recent3post = Post::orderBy('id', 'desc')->take(3)->get();
+        $user = User::findOrFail($id);
+        $currentUser = Auth::user();
+
+        $userTpoint = UserTpoint::where('user_id', $user->id)->first();
+        $tpoint = $userTpoint ? $userTpoint->tpoint : 0.000;
+        $total_likes = $user->likes()->count();
+
+        $posts = Post::where('user_id', $user->id)->get();
+
+        $comments = ProfileComments::where('owner_id', $user->id)->orderBy('id', 'DESC')->with('user')->paginate(10);
+
+        $totalLikesReceived = 0;
+
+        foreach ($posts as $post) {
+            $likesFromOthers = $post->likes()->where('user_id', '<>', $user->id)->count();
+            $likesFromSelf = $post->likes()->where('user_id', $user->id)->count();
+            $totalLikesReceived += $likesFromOthers + $likesFromSelf;
+        }
+
+        return view(
+            'frontend.usercp.index',
+            compact(
+                'menus',
+                'recent3post',
+                'user',
+                'tpoint',
+                'total_likes',
+                'totalLikesReceived',
+                'currentUser',
+                'comments'
+            )
+        );
+    }
+
+    public function usercpPagePost(ProfileCommentsRequest $request, $id) {
+        $user = Auth::user();
+        try {
+            DB::beginTransaction();
+            $comment = new ProfileComments();
+            $comment->user_id = $user->id;
+            $comment->owner_id = $id;
+            $comment->content = $request->content;
+            $comment->save();
+            DB::commit();
+            return redirect()->back();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e->getMessage();
+        }
+    }
+
+    public function usercpCommentsDelete(Request $request ,$id) {
+        try {
+            DB::beginTransaction();
+            $profileComment = ProfileComments::findOrFail($id);
+            $profileComment->delete();
+            DB::commit();
+            return redirect()->back();
+        } catch (Exception $e) {
+            DB::rollBack();
+            throw $e->getMessage();
+        }
     }
 }

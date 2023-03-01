@@ -69,4 +69,15 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Moderator', 'user_id', 'id');
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function hasLikedPost(Post $post)
+    {
+        return $this->likes()->where('post_id', $post->id)->exists();
+    }
+
 }

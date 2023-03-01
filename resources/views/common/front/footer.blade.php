@@ -72,6 +72,7 @@
 		<!-- jQuery Plugins -->
 		<script src="{{ asset('js/jquery.min.js') }}"></script>
 		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 		<script src="{{ asset('js/main.js') }}"></script>
 		<script src="{{ asset('js/particles.js') }}"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
@@ -97,5 +98,5 @@
             });
         </script>
 		@stack('scripts')
-	</body>	
+	</body>
 </html>

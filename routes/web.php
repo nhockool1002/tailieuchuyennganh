@@ -15,12 +15,17 @@ Route::group(['prefix' => 'login'], function () {
     Route::post('', 'LoginController@postLogin')->name('postLogin');
 });
 
+Route::group(['prefix' => 'register'], function () {
+    Route::get('', 'LoginController@getRegister')->name('getRegister');
+    Route::post('', 'LoginController@postRegister')->name('postRegister');
+});
+
 Route::get('/logout', 'LoginController@getLogout')->name('getLogout');
 
-Route::group(['prefix' => '/', 'middleware' => 'checkunderconstruct'], function () {
+Route::group(['prefix' => '/', 'middleware' => ['checkunderconstruct']], function () {
     Route::get('', 'HomeController@getHome')->name('home');
     Route::prefix('/go')->group(function () {
-        Route::get('{string}', 'LinkController@getRedirect')->name('getRedirect');    
+        Route::get('{string}', 'LinkController@getRedirect')->name('getRedirect');
     });
     Route::group(['prefix' => 's3link', 'middleware' => 'checkunderconstruct'], function () {
         Route::get('/{slug}', 'S3ManageController@gotoS3Link')->name('gotoS3Link');
@@ -50,6 +55,11 @@ Route::group(['prefix' => '/', 'middleware' => 'checkunderconstruct'], function 
     Route::prefix('report')->group(function () {
         Route::get('', 'ReportController@index')->name('report');
     });
+
+    Route::post('/post/{post_id}/like', 'PostController@like')->name('post.like');
+    Route::get('user-cp/{id}', 'HomeController@usercpPage')->name('user.cp')->middleware(['role:super-admin|admin|super-moderator|moderator|member']);
+    Route::post('user-cp/{id}', 'HomeController@usercpPagePost')->name('user.cp.post')->middleware(['role:super-admin|admin|super-moderator|moderator|member']);
+    Route::post('user-cp-delete/{id}', 'HomeController@usercpCommentsDelete')->name('user.cp.delete.post')->middleware(['role:super-admin|admin|super-moderator|moderator|member']);
 });
 
 Route::group(['prefix' => 'backend', 'middleware' => ['role:super-admin', 'checklogin', 'checkunderconstruct']], function () {
@@ -231,7 +241,7 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:super-admin', 'check
         Route::get('', 'LogController@getAll')->name('log');
         Route::get('deleteAllLog', 'LogController@deleteAllLog')->name('deleteAllLog');
     });
-    
+
     Route::group(['prefix' => 's3-manage', 'middleware' => 'checkadmin'], function () {
         Route::post('', 'S3ManageController@uploadS3')->name('uploads3post');
         Route::get('/delete/{id}', 'S3ManageController@deleteS3Link')->name('deleteS3Link');
