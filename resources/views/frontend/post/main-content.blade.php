@@ -13,6 +13,18 @@
 </p>
 <div class="post-content">
     {!! $posts->post_content !!}
+    @if($posts->private_content)
+        @if(!Auth::check())
+            <div class="not-auth">[Nội dung - liên kết VIP đã bị ẩn, bạn không thể xem nếu chưa đăng kí thành viên, xin vui lòng đăng kí bằng cách nhấp vào <a href="{{ route('getRegister') }}">Liên kết này để đăng kí thành viên</a>]</div>
+        @elseif(Auth::check() && !Auth::user()->hasRole(['super-admin', 'admin', 'super-moderator', 'moderator', 's-member', 'vip-member']))
+            <div class="auth-not-smem">[Nội dung - liên kết VIP dành cho S-MEMBER trở lên, xin vui lòng nâng cấp tài khoản bằng cách nhấn vào <a href="{{ route('getRegister') }}">NÂNG CẤP TÀI KHOẢN</a>]</div>
+        @else
+            <div class="authicated">
+                <p>NỘI DUNG ẨN</p>
+                {!! $posts->private_content !!}
+            </div>
+        @endif
+    @endif
     <br />
     @if($user_has_like === 0)
         <div class="w-100 like-box">

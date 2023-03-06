@@ -146,10 +146,29 @@ function getRandomColor(){
 function convertRoleToRoleName($role) {
     switch ($role) {
         case 'super-admin':
-            return 'Super Admin';
+            return 'Super Administrator';
+            break;
+        case 'admin':
+            return 'Administrator';
+            break;
+        case 'super-moderator':
+            return 'Global Moderator';
+            break;
+        case 'moderator':
+            return 'Moderator';
+            break;
+        case 's-member':
+            return 'S-Member';
+            break;
+        case 'vip-member':
+            return 'VIP-Member';
             break;
         case 'member':
             return 'Member';
+            break;
+        case 'banned':
+            return 'Banned';
+            break;
         default:
             return '';
     }

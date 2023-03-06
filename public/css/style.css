@@ -1757,13 +1757,17 @@ span.postview-index {
 
     .cnt223 {
         min-width: unset;
-        width: 99%;
-        top: -50px;
+        width: 83%;
+        top: 10px;
+        padding: 15px 15px;
     }
     .cnt223 img {
-        width: 100%;
+        width: 60%;
         max-width: 100%;
         height: auto !important;
+    }
+    .cnt223 p {
+        font-size: 12px;
     }
     .page-header #particles-js {
         display: none;
@@ -2384,7 +2388,7 @@ h4.panel-title a {
     text-align: right;
 }
 
-.delete_comments button {
+.delete_comments button {s
     color: red;
     transition: .5s all ease-out;
 }
@@ -2392,6 +2396,46 @@ h4.panel-title a {
 .delete_comments button:hover {
     color: white;
     background-color: red;
+}
+
+.not-auth, .auth-not-smem {
+    color: red;
+    font-weight: bolder;
+    line-height: 30px;
+}
+
+.not-auth a {
+    animation: unset;
+    animation-iteration-count: unset;
+    background-color: grey;
+    padding: 5px;
+    margin-right: 4px;
+    color: lightgrey;
+    border: 1px solid  lightgrey;
+}
+
+.auth-not-smem a {
+    animation: unset;
+    animation-iteration-count: unset;
+    background-color: lightgreen;
+    padding: 5px;
+    margin-right: 4px;
+    color: white;
+    border: 1px solid  lightgrey;
+}
+
+.authicated {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid indianred;
+    background-color: lightpink;
+    padding: 10px;
+}
+
+.authicated p:first-child {
+    font-weight: bolder;
+    font-size: 12px;
+    color: mediumvioletred;
 }
 
 @media (max-width: 768px) {

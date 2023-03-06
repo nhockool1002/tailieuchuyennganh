@@ -149,48 +149,65 @@ class PostController extends Controller
             $file->move('upload/posts/images/', $name);
         }
 
+        try {
+            DB::beginTransaction();
+            $post = new Post();
+            $post->post_name = $request->title;
+            $post->post_slug = changeTitle($request->title);
+            $post->post_content = $request->content;
+            $post->cat_id = $request->category;
+            $post->private_content = $request->private_content;
+            $post->user_id = Auth::user()->id;
+            $post->post_special = $request->sticky;
+            $post->post_img = $name;
+            $post->save();
 
-        $post = new Post();
-        $post->post_name = $request->title;
-        $post->post_slug = changeTitle($request->title);
-        $post->post_content = $request->content;
-        $post->cat_id = $request->category;
-        $post->user_id = Auth::user()->id;
-        $post->post_special = $request->sticky;
-        $post->post_img = $name;
-        $post->save();
+            $userPoint = UserTpoint::where('user_id', Auth::user()->id)->first();
+            $userPoint->addTpoint(0.5);
 
-        if (isset($request->listdl)) {
-            $zz = json_encode($request->listdl);
-            $dl = new DownloadPost();
-            $dl->post_id = $post->id;
-            $dl->content = $zz;
-            $dl->save();
-        }
+            $userTpointLog = new UserTpointLog();
+            $userTpointLog->user_id = Auth::user()->id;
+            $userTpointLog->content = "ADD POST #". $post->id;
+            $userTpointLog->amount = 5;
+            $userTpointLog->status = "IN";
+            $userTpointLog->save();
 
-        if (isset($request->listht)) {
-            $data = $request->listht;
-            foreach ($data as $item) {
-                $check = HashTag::where('hashtag_name', $item)->get();
-                if ($check->count() == 0) {
-                    $newTag = new HashTag();
-                    $newTag->hashtag_name = $item;
-                    $newTag->save();
-                }
-                $getTag = HashTag::where('hashtag_name', $item)->first();
-                $addTag = new PostHashTag();
-                $addTag->post_id = $post->id;
-                $addTag->hashtag_id = $getTag->id;
-                $addTag->save();
+            if (isset($request->listdl)) {
+                $zz = json_encode($request->listdl);
+                $dl = new DownloadPost();
+                $dl->post_id = $post->id;
+                $dl->content = $zz;
+                $dl->save();
             }
-        }
-        $log = new Log();
-        $log->changelog = 'Add Post  ' . '<b><font color="red">' . $request->title . '</font></b>';
-        $log->user = Auth::user()->username;
-        $log->screen = \Constant::ADD_POST_FUNCTION;
-        $log->save();
 
-        return redirect(route('editPost', $post->id))->with('success_mesage', 'Add post successfully.');
+            if (isset($request->listht)) {
+                $data = $request->listht;
+                foreach ($data as $item) {
+                    $check = HashTag::where('hashtag_name', $item)->get();
+                    if ($check->count() == 0) {
+                        $newTag = new HashTag();
+                        $newTag->hashtag_name = $item;
+                        $newTag->save();
+                    }
+                    $getTag = HashTag::where('hashtag_name', $item)->first();
+                    $addTag = new PostHashTag();
+                    $addTag->post_id = $post->id;
+                    $addTag->hashtag_id = $getTag->id;
+                    $addTag->save();
+                }
+            }
+            $log = new Log();
+            $log->changelog = 'Add Post  ' . '<b><font color="red">' . $request->title . '</font></b>';
+            $log->user = Auth::user()->username;
+            $log->screen = \Constant::ADD_POST_FUNCTION;
+            $log->save();
+
+            DB::commit();
+            return redirect(route('editPost', $post->id))->with('success_mesage', 'Add post successfully.');
+        } catch(Exception $e) {
+            DB::rollBack();
+            throw $e->getMessage();
+        }
     }
 
     public function editPost($id)
@@ -256,6 +273,7 @@ class PostController extends Controller
         $post->post_name = $request->title;
         $post->post_slug = changeTitle($request->title);
         $post->post_content = $request->content;
+        $post->private_content = $request->private_content;
         $post->cat_id = $request->category;
         $post->post_special = $request->sticky;
 
