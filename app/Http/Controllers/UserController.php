@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Log;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Permission;
 use File;
+use Illuminate\Support\Facades\DB;
+use Exception;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Schema\Blueprint;
+use App\UserTpoint;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -22,17 +25,43 @@ class UserController extends Controller
     public function editUser($id)
     {
         $user = User::find($id);
-        $role = Permission::all();
+        $role = Role::all();
         return view('backend.user.edit', compact('user', 'role'));
     }
 
     public function updateUser(Request $request, $id)
     {
         $user = User::find($id);
+
+        if ($id == 1) {
+            unset($request->role);
+            $request['role'] = 'admin';
+        }
+
+        $data = [
+            'user_id' => $id,
+            'role' => $request->role
+        ];
+
         $this->validate($request,
             [
                 'username' => 'required|min:3|max:40',
                 'email' => 'required',
+                // 'role' => [
+                //     'required_if:userId,!=,1', // validate only if userId is not 1
+                //     'in:admin,super-moderator,moderator,member,banned,s-member,vip-member'
+                // ],
+                'role' => [
+                    'required',
+                    function ($attribute, $value, $fail) use ($data) {
+                        if ($data['user_id'] == 1 && !in_array($value, ['super-admin', 'admin', 'super-moderator', 'moderator', 'member', 'banned', 's-member', 'vip-member'])) {
+                            $fail('The role selected :attribute is invalid.');
+                        }
+                        if ($data['user_id'] != 1 && !in_array($value, ['admin', 'super-moderator', 'moderator', 'member', 'banned', 's-member', 'vip-member'])) {
+                            $fail('The role selected :attribute is invalid.');
+                        }
+                    },
+                ],
             ],
             [
                 'username.required' => 'Username không được để trống',
@@ -40,11 +69,10 @@ class UserController extends Controller
                 'username.max' => 'Username có nhiều nhất 40 ký tự',
                 'email.required' => 'Email không được để trống',
             ]);
-
         $nemo = $user->username;
         $user->username = $request->username;
         $user->email = $request->email;
-        $user->role_id = $request->role;
+        $user->role_id = 3;
         $user->sign = $request->sign;
 
         if ($request->hasFile('avatar')) {
@@ -72,7 +100,12 @@ class UserController extends Controller
         $log->screen = \Constant::DELETE_USER_FUNCTION;
         $log->save();
 
+        if ($request->role === 'vip-member') {
+            $user->is_vip = true;
+        }
         $user->save();
+        // $user->syncRoles([]);
+        $user->assignRole($request->role);
         return redirect(route('editUser', $id))->with('success_mesage', 'Member information update successfully.');
     }
 
@@ -95,7 +128,7 @@ class UserController extends Controller
 
     public function addUser()
     {
-        $role = Permission::all();
+        $role = Role::all();
         return view('backend.user.add', compact('role'));
     }
 
@@ -106,6 +139,7 @@ class UserController extends Controller
                 'username' => 'required|min:3|max:40',
                 'password' => 'required|min:6|max:24',
                 'email' => 'required',
+                'role' => 'in:admin,super-moderator,moderator,member,banned,s-member,vip-member'
             ],
             [
                 'username.required' => 'Username không được để trống',
@@ -119,7 +153,7 @@ class UserController extends Controller
         $user = new User();
         $user->username = $request->username;
         $user->email = $request->email;
-        $user->role_id = $request->role;
+        $user->role_id = 3;
         $user->password = bcrypt($request->password);
         $user->aboutme = $request->aboutme;
         $user->remember_token = $request->_token;
@@ -140,7 +174,16 @@ class UserController extends Controller
         $log->screen = \Constant::ADD_USER_FUNCTION;
         $log->save();
 
+        if ($request->role === 'vip-member') {
+            $user->is_vip = true;
+        }
+
         $user->save();
+
+        $user->syncRoles([]);
+        $user->assignRole($request->role);
+        UserTpoint::create(['user_id' => $user->id, 'tpoint' => '0']);
+
         return redirect(route('editUser', $user->id))->with('success_mesage', 'Add member successfully.');
     }
 
@@ -164,5 +207,66 @@ class UserController extends Controller
 
     public function searchUsers(Request $request) {
         return User::where('username', 'LIKE', '%'.$request->q.'%')->where('role_id', '>', 1)->get();
+    }
+
+    public function upgradeVip(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        // Lưu trữ thời gian kết thúc của tính năng VIP (1 tuần)
+        // $vipExpiration = now()->addWeek();
+        $vipExpiration = now()->addSeconds(10);
+
+        try {
+            DB::beginTransaction();
+            // Cập nhật trường vip_expiration trong bảng users
+            $user->update(['is_vip' => true, 'vip_expired_at' => $vipExpiration]);
+            $user->syncRoles([]);
+            $user->assignRole('vip-member');
+            $log = new Log();
+            $log->changelog = '[UPGRADE VIP] FOR ' . $user->username . ' SUCCESS !';
+            $log->user = Auth::user()->username;
+            $log->screen = "VIP FUNCTION";
+            $log->save();
+            DB::commit();
+            return redirect(route('user'))->with('success_mesage', 'Update VIP for ' . $user->username . ' success !');
+        } catch (Exception $e) {
+            DB::rollback();
+            $log = new Log();
+            $log->changelog = '[UPGRADE VIP] FOR ' . $user->username . ' FAILED !';
+            $log->user = Auth::user()->username;
+            $log->screen = "VIP FUNCTION";
+            $log->save();
+            return redirect(route('user'))->with('danger_mesage', 'Update VIP for ' . $user->username . ' failed! <br />' . $e->getMessage());
+        }
+    }
+
+    public function downgradeVip(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        if ($user->hasRole(['vip-member'])) {
+            try {
+                DB::beginTransaction();
+                $user->update(['is_vip' => false, 'vip_expired_at' => null]);
+                $user->syncRoles([]);
+                $user->assignRole('member');
+                $log = new Log();
+                $log->changelog = '[DOWNGRADE VIP] FOR ' . $user->username . ' SUCCESS !';
+                $log->user = Auth::user()->username;
+                $log->screen = "VIP FUNCTION";
+                $log->save();
+                DB::commit();
+                return redirect(route('user'))->with('success_mesage', 'Update UN-VIP for ' . $user->username . ' success !');
+            } catch (Exception $e) {
+                DB::rollback();
+                $log = new Log();
+                $log->changelog = '[UPGRADE VIP] FOR ' . $user->username . ' FAILED !';
+                $log->user = Auth::user()->username;
+                $log->screen = "VIP FUNCTION";
+                $log->save();
+                return redirect(route('user'))->with('danger_mesage', 'Update UN-VIP for ' . $user->username . ' failed! <br />' . $e->getMessage());
+            }
+        }
     }
 }

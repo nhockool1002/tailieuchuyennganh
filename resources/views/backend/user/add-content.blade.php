@@ -51,10 +51,12 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Permission</label>
+                                                <label>Role</label>
                                                 <select name="role" class="form-control border-input">
                                                     @foreach($role as $r)
-                                                	<option value="{{ $r->id }}">{{ $r->role_name }}</option>
+                                                        @if ($r->name !== 'super-admin')
+                                                            <option value="{{ $r->name }}">{{ $r->name }}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>

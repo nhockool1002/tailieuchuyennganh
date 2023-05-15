@@ -54,10 +54,10 @@
 								@else
 								<a class="btn btn-success" href="{{ route('getLogin') }}">Login</a>
 								@endif
-								@if(Auth::check() && Auth::user()->role_id == 1)
+								@if(Auth::check() && Auth::user()->hasRole(['super-admin', 'admin']))
 								<a class="btn btn-danger" href="{{ route('dashboard') }}">AdminCP</a>
 								@endif
-								@if(Auth::check() && Auth::user()->role_id == 2)
+								@if(Auth::check() && Auth::user()->hasAllRoles(['super-moderator', 'moderator']))
 								<a class="btn btn-info" href="{{ route('dashboard') }}">ModCP</a>
 								@endif
 								<hr />

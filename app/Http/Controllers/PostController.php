@@ -6,8 +6,8 @@ use App\UserTpointLog;
 use Illuminate\Http\Request;
 use App\Post;
 use File;
-use Auth;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Exception;
 use App\Menu;
 use App\Log;
@@ -30,19 +30,18 @@ class PostController extends Controller
 {
     public function getAll()
     {
-        $mod = 'Moderator';
-        $admin = 'Administrator';
+        // $mod = 'Moderator';
+        // $admin = 'Administrator';
         $user = Auth::user();
-        if ($user->role->role_name == $mod) {
-            $cat = Moderator::where('user_id', $user->id)->get();
-            $listcat = [];
-            foreach ($cat as $item) {
-                $listcat[] = $item->cat_id;
-            }
-            $posts = Post::whereIn('cat_id', $listcat)->orderBy('id', 'DESC')->paginate(20);
-        }
-
-        if ($user->role->role_name == $admin) {
+        // if ($user->role->role_name == $mod) {
+        //     $cat = Moderator::where('user_id', $user->id)->get();
+        //     $listcat = [];
+        //     foreach ($cat as $item) {
+        //         $listcat[] = $item->cat_id;
+        //     }
+        //     $posts = Post::whereIn('cat_id', $listcat)->orderBy('id', 'DESC')->paginate(20);
+        // }
+        if ($user->hasRole(['super-admin', 'admin', 'super-moderator', 'moderator'])) {
             $posts = Post::orderBy('id', 'DESC')->paginate(20);
         }
 
@@ -51,31 +50,31 @@ class PostController extends Controller
 
     public function deletePost($id)
     {
-        $mod = 'Moderator';
-        $admin = 'Administrator';
+        // $mod = 'Moderator';
+        // $admin = 'Administrator';
         $user = Auth::user();
 
         $post = Post::find($id);
 
 
-        if ($user->role->role_name == $mod) {
-            $cat = Moderator::where('user_id', $user->id)->get();
-            $listcat = [];
-            foreach ($cat as $item) {
-                $listcat[] = $item->cat_id;
-            }
-            if (in_array($post->cat_id, $listcat) == true) {
-                $log = new Log();
-                $log->changelog = 'Delete Post  ' . '<b><font color="red">' . $post->post_name . '</font></b>';
-                $log->user = Auth::user()->username;
-                $log->screen = \Constant::DELETE_POST_FUNCTION;
-                $log->save();
-                $post->delete();
-                return redirect(route('post'))->with('success_mesage', 'Delete post successfully.');
-            }
-        }
+        // if ($user->role->role_name == $mod) {
+        //     $cat = Moderator::where('user_id', $user->id)->get();
+        //     $listcat = [];
+        //     foreach ($cat as $item) {
+        //         $listcat[] = $item->cat_id;
+        //     }
+        //     if (in_array($post->cat_id, $listcat) == true) {
+        //         $log = new Log();
+        //         $log->changelog = 'Delete Post  ' . '<b><font color="red">' . $post->post_name . '</font></b>';
+        //         $log->user = Auth::user()->username;
+        //         $log->screen = \Constant::DELETE_POST_FUNCTION;
+        //         $log->save();
+        //         $post->delete();
+        //         return redirect(route('post'))->with('success_mesage', 'Delete post successfully.');
+        //     }
+        // }
 
-        if ($user->role->role_name == $admin) {
+        if ($user->hasRole(['super-admin', 'admin', 'super-moderator', 'moderator'])) {
             $log = new Log();
             $log->changelog = 'Delete Post  ' . '<b><font color="red">' . $post->post_name . '</font></b>';
             $log->user = Auth::user()->username;
@@ -90,21 +89,21 @@ class PostController extends Controller
 
     public function addPost()
     {
-        $mod = 'Moderator';
-        $admin = 'Administrator';
+        // $mod = 'Moderator';
+        // $admin = 'Administrator';
         $user = Auth::user();
 
-        if ($user->role->role_name == $mod) {
-            $cat = Moderator::where('user_id', $user->id)->get();
-            $listcat = [];
-            foreach ($cat as $item) {
-                $listcat[] = $item->cat_id;
-            }
-            $cats = Category::whereIn('id', $listcat)->get();
-            return view('backend.post.add', compact('cats'));
-        }
+        // if ($user->role->role_name == $mod) {
+        //     $cat = Moderator::where('user_id', $user->id)->get();
+        //     $listcat = [];
+        //     foreach ($cat as $item) {
+        //         $listcat[] = $item->cat_id;
+        //     }
+        //     $cats = Category::whereIn('id', $listcat)->get();
+        //     return view('backend.post.add', compact('cats'));
+        // }
 
-        if ($user->role->role_name == $admin) {
+        if ($user->hasRole(['super-admin', 'admin', 'super-moderator', 'moderator'])) {
             $cats = Category::all();
             return view('backend.post.add', compact('cats'));
         }
@@ -212,8 +211,8 @@ class PostController extends Controller
 
     public function editPost($id)
     {
-        $mod = 'Moderator';
-        $admin = 'Administrator';
+        // $mod = 'Moderator';
+        // $admin = 'Administrator';
         $user = Auth::user();
         $post = Post::find($id);
 
@@ -224,20 +223,20 @@ class PostController extends Controller
             $linkdl = [];
         }
 
-        if ($user->role->role_name == $mod) {
-            $cat = Moderator::where('user_id', $user->id)->get();
-            $listcat = [];
-            foreach ($cat as $item) {
-                $listcat[] = $item->cat_id;
-            }
-            $cats = Category::whereIn('id', $listcat)->get();
-            $listtags = PostHashTag::where('post_id', $post->id)->get();
-            if (in_array($post->cat_id, $listcat) == true) {
-                return view('backend.post.edit', compact('post', 'cats', 'listtags', 'linkdl'));
-            }
-        }
+        // if ($user->role->role_name == $mod) {
+        //     $cat = Moderator::where('user_id', $user->id)->get();
+        //     $listcat = [];
+        //     foreach ($cat as $item) {
+        //         $listcat[] = $item->cat_id;
+        //     }
+        //     $cats = Category::whereIn('id', $listcat)->get();
+        //     $listtags = PostHashTag::where('post_id', $post->id)->get();
+        //     if (in_array($post->cat_id, $listcat) == true) {
+        //         return view('backend.post.edit', compact('post', 'cats', 'listtags', 'linkdl'));
+        //     }
+        // }
 
-        if ($user->role->role_name == $admin) {
+        if ($user->hasRole(['super-admin', 'admin', 'super-moderator', 'moderator'])) {
             $cats = Category::all();
             $listtags = PostHashTag::where('post_id', $post->id)->get();
             return view('backend.post.edit', compact('post', 'cats', 'listtags', 'linkdl'));
