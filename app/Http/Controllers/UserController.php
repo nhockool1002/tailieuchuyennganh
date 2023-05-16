@@ -213,9 +213,9 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // Lưu trữ thời gian kết thúc của tính năng VIP (1 tuần)
-        // $vipExpiration = now()->addWeek();
-        $vipExpiration = now()->addSeconds(10);
+        // Lưu trữ thời gian kết thúc của tính năng VIP (1 tháng)
+        $vipExpiration = now()->addMonth();
+        // $vipExpiration = now()->addSeconds(10);
 
         try {
             DB::beginTransaction();
