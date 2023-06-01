@@ -78,6 +78,7 @@ class LoginController extends Controller
     }
 
     public function postRegister(RegisterRequest $request) {
+        app('mathcaptcha')->reset();
         try {
             DB::beginTransaction();
             $user = new User();
@@ -85,7 +86,7 @@ class LoginController extends Controller
             $user->email = $request->email;
             $user->password = bcrypt($request->password);
             $user->role_id = '3';
-            $user->service_shortlink_id = '6';
+            $user->service_shortlink_id = '1';
             $user->save();
             $user->assignRole('member');
             UserTpoint::create(['user_id' => $user->id, 'tpoint' => '0']);

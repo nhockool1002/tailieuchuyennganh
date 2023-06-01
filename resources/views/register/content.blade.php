@@ -19,13 +19,13 @@
 						</span>
 					</div>
 
-                    <div class="wrap-input100 validate-input m-b-10" data-validate = "Email is required">
-                        <input class="input100" type="text" name="email" placeholder="Email">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
+					<div class="wrap-input100 validate-input m-b-10" data-validate = "Email is required">
+							<input class="input100" type="text" name="email" placeholder="Email">
+							<span class="focus-input100"></span>
+							<span class="symbol-input100">
 							<i class="fa fa-envelope"></i>
-						</span>
-                    </div>
+							</span>
+					</div>
 
 					<div class="wrap-input100 validate-input m-b-10" data-validate = "Password is required">
 						<input class="input100" type="password" name="password" placeholder="Mật khẩu">
@@ -35,13 +35,19 @@
 						</span>
 					</div>
 
-                    <div class="wrap-input100 validate-input m-b-10" data-validate = "Password confirmation is required">
-                        <input class="input100" type="password" name="password_confirmation" placeholder="Mật khẩu xác nhận">
-                        <span class="focus-input100"></span>
-                        <span class="symbol-input100">
-							<i class="fa fa-lock"></i>
-						</span>
-                    </div>
+					<div class="wrap-input100 validate-input m-b-10" data-validate = "Password confirmation is required">
+							<input class="input100" type="password" name="password_confirmation" placeholder="Mật khẩu xác nhận">
+							<span class="focus-input100"></span>
+							<span class="symbol-input100">
+								<i class="fa fa-lock"></i>
+							</span>
+					</div>
+					<p class="mathlabel">Please solve the following math function: <span class="mathfunction">{{ app('mathcaptcha')->label() }}</span></p>
+					<div class="form-group">
+						<div class="wrap-input100 m-b-10 w-100">
+							{!! app('mathcaptcha')->input(['class' => 'input100 form-control mathinput', 'id' => 'mathgroup', 'placeholder' => '12']) !!}
+						</div>
+					</div>
 					@if(count($errors) > 0)
                         <div class="wrap-input100 validate-input m-b-10  alert alert-danger">
                             @foreach($errors->all() as $err)

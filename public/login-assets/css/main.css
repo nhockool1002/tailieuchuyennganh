@@ -524,6 +524,46 @@ iframe {
   cursor: pointer;
 }
 
+.mathlabel {
+  color: white;
+  font-weight: bolder;
+  font-family: Montserrat-Bold;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 12px;
+  padding-left: 10px;
+  padding-top: 15px;
+  border-top: 1px solid white;
+  width: 100%;
+}
+
+.mathinput {
+  width: 390px;
+}
+
+.mathgroup {
+  background-color: white;
+  border-radius: 25px;
+  padding: 10px;
+  height: 50px;
+  line-height: 31px;
+  font-size: 16px;
+  width: 100%;
+  color: #999999;
+  font-weight: bolder;
+  font-family: Montserrat-Bold;
+}
+
+.mathfunction {
+  color: red;
+  font-family: Montserrat-Bold;
+  margin-left: 15px;
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
 @media (max-width: 992px) {
   .alert-validate::before {
     visibility: visible;
