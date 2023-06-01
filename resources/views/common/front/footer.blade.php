@@ -66,6 +66,9 @@
 				<!-- /row -->
 			</div>
 			<!-- /container -->
+			<div class="dmca" style="width: 100%; text-align: center;">
+				<a href="//www.dmca.com/Protection/Status.aspx?ID=a94ee73e-52e7-4e88-ab81-c47494d2f4bf" title="DMCA.com Protection Status" class="dmca-badge" style="margin: 0 auto;"> <img src ="https://images.dmca.com/Badges/dmca-badge-w100-5x1-06.png?ID=a94ee73e-52e7-4e88-ab81-c47494d2f4bf"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+			</div>
 		</footer>
 		<!-- /Footer -->
 
