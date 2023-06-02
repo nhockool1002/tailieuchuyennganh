@@ -25,6 +25,7 @@ use App\Like;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Response;
+use Mtownsend\ReadTime\ReadTime;
 
 class PostController extends Controller
 {
@@ -397,7 +398,8 @@ class PostController extends Controller
             $tpoint = $userTpoint ? $userTpoint->tpoint : 0.000;
         }
         $likedUsers = $posts->likes->pluck('user');
-        return view('frontend.post.index', compact('posts', 'cats', 'menus', 'recent3post', 'relatepost', 'randompost', 'bottom_post_728x90', 'bottom_right_widget_post_320x250', 'social', 'hashtags', 'linkdl', 'category_top_content_728x90', 'tpoint', 'user_has_like', 'likedUsers', 'user'));
+        $readTime = (new ReadTime($posts->post_content, $omitSeconds = true, $abbreviated = false, $wordsPerMinute = 230))->get();
+        return view('frontend.post.index', compact('readTime', 'posts', 'cats', 'menus', 'recent3post', 'relatepost', 'randompost', 'bottom_post_728x90', 'bottom_right_widget_post_320x250', 'social', 'hashtags', 'linkdl', 'category_top_content_728x90', 'tpoint', 'user_has_like', 'likedUsers', 'user'));
     }
 
     public function getSearch(Request $request)

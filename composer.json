@@ -13,6 +13,7 @@
         "joshtronic/php-loremipsum": "dev-master",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
+        "mtownsend/read-time": "^2.0",
         "spatie/laravel-permission": "^2.38"
     },
     "require-dev": {

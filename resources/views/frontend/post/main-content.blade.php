@@ -7,6 +7,7 @@
 <p>
     <span><small>Chia sẻ bởi </small></span><span class="meta-user">{{ $posts->user->username }}</span>
     <span class="meta-view-count"><small> ({{ $posts->view_count }} Lượt xem)</small></span>
+    <span style="color:gray; font-size: 12px;float: right;">〜 {{ $readTime }} </span>
     @if(Auth::check() && Auth::user()->role_id == 1)
 		<a class="btn btn-danger" href="{{ route('editPost', $posts->id) }}">EDIT</a>
 	@endif
