@@ -32,17 +32,17 @@ Route::group(['prefix' => '/', 'middleware' => ['checkunderconstruct']], functio
     });
 
     Route::middleware('countviewpost')->group(function() {
-        Route::prefix('post/{id}/{slug}')->group(function () {
+        Route::prefix('post/{id}/{slug}.html')->group(function () {
             Route::get('', 'PostController@getPost')->name('getPost');
         });
         Route::prefix('post/get-relate-post')->group(function () {
             Route::get('', 'PostController@getRelatePost')->name('getRelatePost');
         });
     });
-    Route::prefix('page/{id}/{slug}')->group(function () {
+    Route::prefix('page/{id}-{slug}.html')->group(function () {
         Route::get('', 'PageController@getPage')->name('getPage');
     });
-    Route::prefix('category/{slug}/{id}')->group(function () {
+    Route::prefix('category/{slug}-{id}.html')->group(function () {
         Route::get('', 'CategoryController@getCategory')->name('getCategory');
     });
     Route::get('search', 'PostController@getSearch')->name('search');

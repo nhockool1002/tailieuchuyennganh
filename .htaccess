@@ -1,10 +1,27 @@
+# RewriteEngine On
+#  RewriteRule ^(.*)$ public/$1 [L]
+
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST} [L,R=301]
+
+# RewriteEngine On
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+
 RewriteEngine On
- RewriteRule ^(.*)$ public/$1 [L]
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]
 
 RewriteEngine On
 RewriteCond %{HTTPS} off
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST} [L,R=301]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-RewriteEngine On
-RewriteCond %{HTTPS} !=on
-RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Rewrite URLs for posts
+RewriteRule ^(.+)/?$ public/index.php/$1.html [L]
+
+# Rewrite URLs for categories
+RewriteRule ^category/(.+)/?$ public/index.php/category/$1.html [L]
