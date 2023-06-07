@@ -225,3 +225,41 @@ likeBtn.click(function() {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+	const downloadPdf = document.getElementById("download-pdf-content");
+	
+	downloadPdf.addEventListener("click", function() {
+			const element = document.getElementById("post-content-wrap");
+			const el1 = element.cloneNode(true);
+			el1.insertAdjacentHTML(
+				"afterbegin", 
+				`
+				<span style="color: red; font-weight: bolder; font-size: 18px;">${el1.dataset.title}</span>
+				<br />
+				<span style="color: black; margin-right: 3px;">Chia sẻ bởi ${el1.dataset.author}</span>
+				<span style="color: gray;font-size: 12px;">(${el1.dataset.readtime})</span>
+				<p></p>
+				`
+			);
+			el1.insertAdjacentHTML(
+				"beforeend",
+				`<div style="color: red; text-align: center; width: 100%;">
+				 ☘️ BÀI VIẾT ĐƯỢC CHIA SẺ BỞI TAILIEUCHUYENNGANH.COM - VUI LÒNG ĐỂ NGUYÊN NGUỒN KHI COPY ☘️
+				</div>`
+			);
+			el1.style.setProperty("max-height", "unset");
+			el1.style.setProperty("overflow-y", "visible");
+			const opt = {
+				margin: 0.5,
+				filename: 'myFile.pdf',
+				image: { type: 'jpeg', quality: 0.98 },
+				html2canvas: { scale: 2 },
+				jsPDF: { unit: 'in', format: 'A4', orientation: 'portrait' },
+			};
+			html2pdf().set(opt).from(el1).save().then(() => {
+					el1.style.setProperty("max-height", "860px");
+					el1.style.setProperty("overflow-y", "scroll");
+			});
+	});
+});

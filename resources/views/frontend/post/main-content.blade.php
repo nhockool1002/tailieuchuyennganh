@@ -12,8 +12,31 @@
 		<a class="btn btn-danger" href="{{ route('editPost', $posts->id) }}">EDIT</a>
 	@endif
 </p>
+<div style="
+    background-color: gray; 
+    width: 100px;
+    text-align: center;
+    color: white;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 10px;
+    transition: .4s all ease-in-out;
+    margin-bottom: 10px;
+    "
+    class="download-pdf-content"
+    id="download-pdf-content"
+>
+    Lưu về <img style="margin-left: 5px" src="{{ asset('img/pdf.svg') }}" />
+</div>
 <div class="post-content">
+    <div 
+        id="post-content-wrap"
+        data-title="{{ $posts->post_name }}"
+        data-readtime="{{ $readTime }}"
+        data-author="{{ $posts->user->username }}"
+    >
     {!! $posts->post_content !!}
+    </div>
     @if($posts->private_content)
         @if(!Auth::check())
             <div class="not-auth">[Nội dung - liên kết VIP đã bị ẩn, bạn không thể xem nếu chưa đăng kí thành viên, xin vui lòng đăng kí bằng cách nhấp vào <a href="{{ route('getRegister') }}">Liên kết này để đăng kí thành viên</a>]</div>

@@ -2438,6 +2438,12 @@ h4.panel-title a {
     color: mediumvioletred;
 }
 
+.download-pdf-content:hover {
+    margin-top: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     .userRank {
         text-align: center;
