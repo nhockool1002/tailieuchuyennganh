@@ -547,10 +547,17 @@ textarea.input {
     display: block;
     -webkit-transition: 0.2s opacity;
     transition: 0.2s opacity;
+    overflow: hidden;
 }
 .post .post-img:hover,
 .post .post-img:focus {
     opacity: 0.9;
+}
+
+.post .post-img:hover img,
+.post .post-img:focus img {
+    transform: scale(1.2);
+    transition: .4s ease-in-out all;
 }
 .post .post-img > img {
     width: 100%;
@@ -2443,6 +2450,8 @@ h4.panel-title a {
     margin-left: 5px;
     cursor: pointer;
 }
+
+
 
 @media (max-width: 768px) {
     .userRank {
