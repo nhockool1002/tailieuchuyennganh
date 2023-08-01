@@ -64,7 +64,7 @@
                                             <td>{{ $user->username }}</td>
                                         	<td>{{ $user->email }}</td>
                                         	<td>{{ $user->created_at }}</td>
-                                        	<td>{{ $user->role->role_name }}</td>
+                                        	<td>{{ convertRoleToRoleName($user->getRoleNames()[0]) }}</td>
                                             <td>
                                                 <a href="{{ route('editUser', $user->id) }}" class="btn btn-sm btn-primary"><i class="ti-pencil"></i></a>
                                                 <a href="{{ route('deleteUser', $user->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="ti-close"></i></a>

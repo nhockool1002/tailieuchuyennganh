@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasRoles, Notifiable;
 
     protected $table = "users";
     /**
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'username', 'email', 'password',
+        'username', 'email', 'password', 'is_vip', 'vip_expired_at'
     ];
 
     /**
@@ -32,6 +33,11 @@ class User extends Authenticatable
     public function post()
     {
         return $this->hasMany('App\Post', 'user_id', 'id');
+    }
+
+    public function countPosts()
+    {
+        return $this->post()->count();
     }
 
     public function page()
@@ -63,4 +69,15 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Moderator', 'user_id', 'id');
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function hasLikedPost(Post $post)
+    {
+        return $this->likes()->where('post_id', $post->id)->exists();
+    }
+
 }

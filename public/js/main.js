@@ -167,3 +167,99 @@ function confirmRobot(e) {
 		return false;
   }
 }
+
+function convertKeyToMessage(string) {
+    switch (string) {
+        case 'not_login':
+            return "Bạn chưa Login, không thể like post.";
+        case 'like_duplicate':
+            return "Bạn đã like bài viết này rồi."
+        default:
+            return "EMPTY MESSAGE";
+    }
+}
+
+const likeBtn = $('.not-thank');
+
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": true,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
+likeBtn.click(function() {
+    const post_id = $(this).data('post-id');
+    const like_box = $('.like-box');
+    const box_thank = $('.box-say-thank');
+    $.ajax({
+        url: '/post/' + post_id + '/like',
+        method: 'POST',
+        data: { post_id } ,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            like_box.html(`<div class="thanked" data-post-id="{{ $posts->id }}">
+                <span class="icon">
+                    <img src="../../img/like.png" />
+                </span>
+                <span class="content-thank">YOU THANKED</span>
+            </div>`);
+            response.list && box_thank.html(`${response.list}`);
+            toastr.info("Bạn đã nhận được 0.5 TPoint$");
+        },
+        error: function(err) {
+            const error = JSON.parse(err.responseText);
+            toastr.error(convertKeyToMessage(error.message));
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+	const downloadPdf = document.getElementById("download-pdf-content");
+	
+	downloadPdf.addEventListener("click", function() {
+			const element = document.getElementById("post-content-wrap");
+			const el1 = element.cloneNode(true);
+			el1.insertAdjacentHTML(
+				"afterbegin", 
+				`
+				<span style="color: red; font-weight: bolder; font-size: 18px;">${el1.dataset.title}</span>
+				<br />
+				<span style="color: black; margin-right: 3px;">Chia sẻ bởi ${el1.dataset.author}</span>
+				<span style="color: gray;font-size: 12px;">(${el1.dataset.readtime})</span>
+				<p></p>
+				`
+			);
+			el1.insertAdjacentHTML(
+				"beforeend",
+				`<div style="color: red; text-align: center; width: 100%;">
+				 ☘️ BÀI VIẾT ĐƯỢC CHIA SẺ BỞI TAILIEUCHUYENNGANH.COM - VUI LÒNG ĐỂ NGUYÊN NGUỒN KHI COPY ☘️
+				</div>`
+			);
+			el1.style.setProperty("max-height", "unset");
+			el1.style.setProperty("overflow-y", "visible");
+			const opt = {
+				margin: 0.5,
+				filename: 'myFile.pdf',
+				image: { type: 'jpeg', quality: 0.98 },
+				html2canvas: { scale: 2 },
+				jsPDF: { unit: 'in', format: 'A4', orientation: 'portrait' },
+			};
+			html2pdf().set(opt).from(el1).save().then(() => {
+					el1.style.setProperty("max-height", "860px");
+					el1.style.setProperty("overflow-y", "scroll");
+			});
+	});
+});

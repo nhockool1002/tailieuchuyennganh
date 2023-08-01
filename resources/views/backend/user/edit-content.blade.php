@@ -88,20 +88,22 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    @if($user ->id != 1)
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Permission</label>
+                                                <label>Role</label>
                                                 <select name="role" class="form-control border-input">
                                                     @foreach($role as $r)
-                                                	<option value="{{ $r->id }}" @if($r->id == $user->role->id) selected="selected" @endif>{{ $r->role_name }}</option>
+                                                        @if ($r->name !== 'super-admin')
+                                                	        <option value="{{ $r->name }}" @if($r->name == $user->roles[0]->name) selected="selected" @endif>{{ $r->name }}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-
+                                    @endif
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">

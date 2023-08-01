@@ -37,6 +37,7 @@
                                     	<th>Join Date</th>
                                     	<th>Permission</th>
                                         <th>Opion</th>
+                                        <th>VIP Option</th>
                                     </thead>
                                     <tbody>
                                         @foreach($users as $user)
@@ -45,10 +46,24 @@
                                             <td>{{ $user->username }}</td>
                                         	<td>{{ $user->email }}</td>
                                         	<td>{{ $user->created_at }}</td>
-                                        	<td>{{ $user->role->role_name }}</td>
+                                        	<td>{{ convertRoleToRoleName($user->getRoleNames()[0]) }}</td>
                                             <td>
                                                 <a href="{{ route('editUser', $user->id) }}" class="btn btn-sm btn-primary"><i class="ti-pencil"></i></a>
                                                 <a href="{{ route('deleteUser', $user->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="ti-close"></i></a>
+                                            </td>
+                                            <td>
+                                                @if($user->hasRole(['member']))
+                                                    <form method="POST" action={{ route('upgradeVip', ['id' => $user->id]) }}>
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-success">🔼</button>
+                                                    </form>
+                                                @endif
+                                                @if($user->hasRole(['vip-member']))
+                                                    <form method="POST" action={{ route('downgradeVip', ['id' => $user->id]) }}>
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-warning">🔽</button>
+                                                    </form>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach

@@ -66,14 +66,40 @@
 				<!-- /row -->
 			</div>
 			<!-- /container -->
+			<div class="dmca" style="width: 100%; text-align: center;">
+				<a href="//www.dmca.com/Protection/Status.aspx?ID=a94ee73e-52e7-4e88-ab81-c47494d2f4bf" title="DMCA.com Protection Status" class="dmca-badge" style="margin: 0 auto;"> <img src ="https://images.dmca.com/Badges/dmca-badge-w100-5x1-06.png?ID=a94ee73e-52e7-4e88-ab81-c47494d2f4bf"  alt="DMCA.com Protection Status" /></a>  <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+			</div>
 		</footer>
 		<!-- /Footer -->
 
 		<!-- jQuery Plugins -->
 		<script src="{{ asset('js/jquery.min.js') }}"></script>
 		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 		<script src="{{ asset('js/main.js') }}"></script>
 		<script src="{{ asset('js/particles.js') }}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+		<script src="https://unpkg.com/highlightjs-copy/dist/highlightjs-copy.min.js"></script>
+        <script>
+            hljs.initHighlightingOnLoad();
+            hljs.addPlugin(new CopyButtonPlugin());
+            var jsQuery = $('.jsQuery');
+            var phpQuery = $('.phpQuery');
+            var pythonQuery = $('.pythonQuery');
+            jsQuery.each(function(index, obj) {
+                const el = $(obj);
+                el.parent().addClass("box-view-wrapper");
+                el.html(`<div class="box-code-view"><pre><code class="language-javascript">${el.text()}</code></pre></div>`);
+            });
+            phpQuery.each(function(index, obj) {
+                const el = $(obj);
+                el.html(`<div class="box-code-view"><pre><code class="language-php">${el.text()}</code></pre></div>`);
+            });
+            pythonQuery.each(function(index, obj) {
+                const el = $(obj);
+                el.html(`<div class="box-code-view"><pre><code class="language-python">${el.text()}</code></pre></div>`);
+            });
+        </script>
 		@stack('scripts')
-	</body>	
+	</body>
 </html>

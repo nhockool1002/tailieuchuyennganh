@@ -63,6 +63,14 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Private Content</label>
+                                            <textarea rows="5" class="form-control border-input" placeholder="Here can be your description" id="editor2" name="private_content">{{ $post->private_content }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-md-12 download-zone-box">
                                         <div class="form-group">
                                             <label>Link Download </label>
@@ -163,7 +171,7 @@
                                             </div>
                                             <div class="list-hashtag">
                                                 <ul id="hashtag-ul">
-                                                    
+
                                                 </ul>
                                             </div>
                                         </div>

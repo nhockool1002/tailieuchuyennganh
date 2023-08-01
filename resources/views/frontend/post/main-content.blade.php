@@ -7,18 +7,89 @@
 <p>
     <span><small>Chia sẻ bởi </small></span><span class="meta-user">{{ $posts->user->username }}</span>
     <span class="meta-view-count"><small> ({{ $posts->view_count }} Lượt xem)</small></span>
+    <span style="color:gray; font-size: 12px;float: right;">〜 {{ $readTime }} </span>
     @if(Auth::check() && Auth::user()->role_id == 1)
 		<a class="btn btn-danger" href="{{ route('editPost', $posts->id) }}">EDIT</a>
 	@endif
 </p>
+<div style="
+    background-color: gray; 
+    width: 100px;
+    text-align: center;
+    color: white;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 10px;
+    transition: .4s all ease-in-out;
+    margin-bottom: 10px;
+    "
+    class="download-pdf-content"
+    id="download-pdf-content"
+>
+    Lưu về <img style="margin-left: 5px" src="{{ asset('img/pdf.svg') }}" />
+</div>
 <div class="post-content">
+    <div 
+        id="post-content-wrap"
+        data-title="{{ $posts->post_name }}"
+        data-readtime="{{ $readTime }}"
+        data-author="{{ $posts->user->username }}"
+    >
     {!! $posts->post_content !!}
+    </div>
+    @if($posts->private_content)
+        @if(!Auth::check())
+            <div class="not-auth">[Nội dung - liên kết VIP đã bị ẩn, bạn không thể xem nếu chưa đăng kí thành viên, xin vui lòng đăng kí bằng cách nhấp vào <a href="{{ route('getRegister') }}">Liên kết này để đăng kí thành viên</a>]</div>
+        @elseif(Auth::check() && !Auth::user()->hasRole(['super-admin', 'admin', 'super-moderator', 'moderator', 's-member', 'vip-member']))
+            <div class="auth-not-smem">[Nội dung - liên kết VIP dành cho S-MEMBER trở lên, xin vui lòng nâng cấp tài khoản bằng cách nhấn vào <a href="{{ route('getRegister') }}">NÂNG CẤP TÀI KHOẢN</a>]</div>
+        @else
+            <div class="authicated">
+                <p>NỘI DUNG ẨN</p>
+                {!! $posts->private_content !!}
+            </div>
+        @endif
+    @endif
+    <br />
+    @if($user_has_like === 0)
+        <div class="w-100 like-box">
+            <div class="not-thank" data-post-id="{{ $posts->id }}">
+                <span class="icon">
+                    <img src="{{ asset('img/like.png') }}" />
+                </span>
+                <span class="content-thank">THANK POST</span>
+            </div>
+        </div>
+    @elseif($user_has_like === 1)
+        <div class="w-100 like-box">
+            <div class="thanked" data-post-id="{{ $posts->id }}">
+                <span class="icon">
+                    <img src="{{ asset('img/like.png') }}" />
+                </span>
+                <span class="content-thank">YOU THANKED</span>
+            </div>
+        </div>
+    @endif
     <br />
     @if(isset($category_top_content_728x90))
     <a href="{{ $category_top_content_728x90->target_link }}" style="display: inline-block;margin: auto;">
         <img class="img-responsive" src="{{ $category_top_content_728x90->ads_img }}" alt="" target="_blank">
     </a>
     @endif
+    @if($likedUsers && count($likedUsers) >= 0)
+    <hr />
+    <h4 class="people-say-thank">Các thành viên đã like bài viết: </h4>
+    @endif
+    <div class="box-say-thank">
+        @if($likedUsers && count($likedUsers) >= 0)
+            @foreach($likedUsers as $user)
+                @if(!$loop->last)
+                    <a href="#">{{ $user->username }}</a>,
+                @else
+                    <a href="#">{{ $user->username }}</a>
+                @endif
+            @endforeach
+        @endif
+    </div>
     <!-- @include('frontend.post.spoiler') -->
     <hr />
     @if (!empty($linkdl))

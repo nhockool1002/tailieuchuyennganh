@@ -19,7 +19,7 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                @if(Auth::user()->role_id ==1)
+                @if(Auth::user()->hasRole(['super-admin', 'admin']))
                 <li {{{ (Request::is('backend/user*') ? 'class=active' : '') }}}{{{ (Request::is('backend/filter*') ? 'class=active' : '') }}}>
                     <a href="{{ route('user') }}">
                         <i class="ti-user"></i>
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 @endif
-                @if(Auth::user()->role_id ==1)
+                @if(Auth::user()->hasRole(['super-admin', 'admin']))
                 <li {{{ (Request::is('backend/category*') ? 'class=active' : '') }}}>
                     <a href="{{ route('category') }}">
                         <i class="ti-folder"></i>
@@ -41,7 +41,7 @@
                         <p>Posts Manager</p>
                     </a>
                 </li>
-                @if(Auth::user()->role_id ==1)
+                @if(Auth::user()->hasRole(['super-admin', 'admin']))
                 <li {{{ (Request::is('backend/page*') ? 'class=active' : '') }}}>
                     <a href="{{ route('page') }}">
                         <i class="ti-blackboard"></i>
@@ -49,7 +49,7 @@
                     </a>
                 </li>
                 @endif
-                @if(Auth::user()->role_id ==1)
+                @if(Auth::user()->hasRole(['super-admin', 'admin']))
                 <li {{{ (Request::is('backend/menu*') ? 'class=active' : '') }}}>
                     <a href="{{ route('menu') }}">
                         <i class="ti-direction-alt"></i>
@@ -63,7 +63,7 @@
                         <p>Links Manager</p>
                     </a>
                 </li>
-                @if(Auth::user()->role_id ==1)
+                @if(Auth::user()->hasRole(['super-admin', 'admin']))
                 <li {{{ (Request::is('backend/ads*') ? 'class=active' : '') }}}>
                     <a href="{{ route('ads') }}">
                         <i class="ti-shield"></i>
@@ -71,7 +71,7 @@
                     </a>
                 </li>
                 @endif
-                @if(Auth::user()->role_id ==1 || Auth::user()->role_id ==2)
+                @if(Auth::user()->hasRole(['super-admin', 'admin']))
                 <li {{{ (Request::is('backend/settings*') ? 'class=active' : '') }}}>
                     <a href="{{ route('setting') }}">
                         <i class="ti-settings"></i>
@@ -79,7 +79,15 @@
                     </a>
                 </li>
                 @endif
-                @if(Auth::user()->role_id ==1)
+                @if(Auth::user()->hasRole(['super-admin', 'admin']))
+                <li {{{ (Request::is('backend/pokemon*') ? 'class=active' : '') }}}>
+                    <a href="{{ route('indexViewPokemon') }}">
+                        <i class="ti-medall"></i>
+                        <p>Pokemon Controller</p>
+                    </a>
+                </li>
+                @endif
+                @if(Auth::user()->hasRole(['super-admin', 'admin']))
                 <li {{{ (Request::is('backend/log*') ? 'class=active' : '') }}}>
                     <a href="{{ route('log') }}">
                         <i class="ti-bookmark"></i>

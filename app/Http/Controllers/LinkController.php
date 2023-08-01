@@ -202,11 +202,15 @@ class LinkController extends Controller
 
                 $url = Link::where('hash', $string)->first();
                 $rURL = json_decode($url->shorten_list, TRUE);
-				return redirect($rURL[$key_service]);
+				// return redirect($rURL[$key_service]);
+				$url = $rURL[$key_service];
+				return view('redirect.redirect' , compact('url'));
 			}
     	}
     	else {
-    		return redirect($data[$key_service]);
+    		// return redirect($data[$key_service]);
+				$url = $data[$key_service];
+				return view('redirect.redirect' , compact('url'));
     	}
     }
 
