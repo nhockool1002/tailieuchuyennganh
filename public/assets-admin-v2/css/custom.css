@@ -1,0 +1,147 @@
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar handle */
+  border-radius: 5px; /* Rounded corners of the handle */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the scrollbar handle on hover */
+}
+
+legend {
+  font-size: 0.9rem !important;
+  font-weight: lighter !important;
+}
+
+input, textarea {
+  color: white !important;
+  font-weight: lighter !important;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+.modal-content {
+  max-height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.dataTables_wrapper .dataTable thead .sorting:before, .dataTables_wrapper .dataTable thead .sorting:after, .dataTables_wrapper .dataTable thead .sorting_asc:before, .dataTables_wrapper .dataTable thead .sorting_asc:after, .dataTables_wrapper .dataTable thead .sorting_desc:before, .dataTables_wrapper .dataTable thead .sorting_desc:after, .dataTables_wrapper .dataTable thead .sorting_asc_disabled:before, .dataTables_wrapper .dataTable thead .sorting_asc_disabled:after, .dataTables_wrapper .dataTable thead .sorting_desc_disabled:before, .dataTables_wrapper .dataTable thead .sorting_desc_disabled:after {
+    line-height: 0.5 !important;
+    font-size: 0.95rem !important;
+}
+
+.table thead th, .jsgrid .jsgrid-table thead th {
+  color: #d4ffea !important;
+}
+
+.dataTables_wrapper label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-content-title {
+  margin-bottom: 15px;
+}
+
+.downgrade-vip-icon {
+  font-size: 22px;
+  cursor: pointer;
+  color: rgb(210, 11, 11);
+}
+
+.upgrade-vip-icon {
+  font-size: 22px;
+  cursor: pointer;
+  color: #ffab00;
+}
+
+.edit-user-icon {
+  font-size: 22px;
+  cursor: pointer;
+  color: rgb(79, 140, 255);
+}
+
+.remove-user-icon {
+  font-size: 22px;
+  cursor: pointer;
+  color: rgb(210, 11, 11);
+}
+
+/* Loading Screen */
+.loading_screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgb(22 21 18 / 86%);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1500;
+  transition: .4s ease-in all;
+}
+
+/* Table */
+.table-white td {
+  color: rgb(156, 156, 156);
+}
+
+/* Sidebar */
+.user-icon .mdi-table-account {
+  color: #ffab00;
+}
+
+.wrap-image-avatar {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.editUserAvatarImg {
+  margin-bottom: 20px;
+  border-radius: 50%;
+}
+
+.uploadAvatarUser {
+  width: 100px;
+  height: 100px;
+  background-color: #6ba41fb8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  border-radius: 50%;
+  display: none;
+  transition: .8s ease-in all;
+}
+
+.uploadAvatarUser span {
+  font-size: 30px;
+}
+
+.wrap-image-avatar:hover .uploadAvatarUser {
+  display: flex;
+  cursor: pointer;
+}
+
+.form-check-success {
+  margin-right: 20px;
+}

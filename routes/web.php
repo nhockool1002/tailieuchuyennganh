@@ -256,6 +256,19 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:super-admin', 'check
     });
 });
 
+Route::group(['prefix' => 'admin-cp-2612', 'middleware' => ['role:super-admin', 'checklogin', 'checkunderconstruct']], function () {
+    Route::get('', function () {
+        return view('admin-v2.dashboard.index');
+    })->name('admin.v2.dashboard');
+
+    Route::group(['prefix' => 'user', 'middleware' => 'role:super-admin'], function () {
+        Route::get('', 'adminV2\UserControllerV2@getAll')->name('admin.v2.user');
+        Route::get('/{id}', 'adminV2\UserControllerV2@getUser')->name('admin.v2.get_user');
+        Route::post('/avatar/{id}', 'adminV2\UserControllerV2@updateAvatarUser')->name('admin.v2.update_avatar_user');
+        Route::post('/{id}', 'adminV2\UserControllerV2@updateUser')->name('admin.v2.update_user');
+    });
+});
+
 Route::get('nganluong', function () {
     return view('home/index');
 });
