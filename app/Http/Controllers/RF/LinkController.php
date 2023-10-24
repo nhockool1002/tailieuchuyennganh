@@ -35,6 +35,7 @@ class LinkController extends Controller
                     'name' => $request->name,
                     'origin' => $request->url,
                     'short_link' => $shrink_earn_url,
+                    'hash' => $this->generateString(),
                     'created_by' => $request->user()->username
                 ]);
                 DB::commit();
@@ -67,5 +68,15 @@ class LinkController extends Controller
 			Log::error($e->getMessage());
             return response()->json(['success' => false, 'message' => $e->getMessage()], 400);
         }
+    }
+
+    public function getRedirect($string) {
+        $get_link = LinkCreator::where('hash', $string);
+    	if ($get_link->count() == 0) {
+    		return redirect(route('home'));
+    	}
+    	$link = $get_link->first();
+        $url = $link->short_link;
+    	return view('redirect.redirect' , compact('url'));
     }
 }

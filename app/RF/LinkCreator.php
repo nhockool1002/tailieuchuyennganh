@@ -11,6 +11,7 @@ class LinkCreator extends Model
         'name',
         'origin',
         'short_link',
+        'hash',
         'created_by',
         'created_at',
         'updated_at',

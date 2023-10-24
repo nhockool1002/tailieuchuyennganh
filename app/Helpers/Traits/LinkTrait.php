@@ -1,6 +1,7 @@
 <?php
 namespace App\Helpers\Traits;
 use Illuminate\Support\Facades\Log;
+use App\RF\LinkCreator;
 use Exception;
 
 trait LinkTrait
@@ -28,5 +29,19 @@ trait LinkTrait
 			Log::error($e);
 			return false;
 		}
+	}
+
+	/**
+	 * generate hash string
+	 * @param $name string
+	 * @param $url string
+	 * @return boolean | string
+	 */
+	public function generateString() {
+		$stTitle = rand_string(7);
+		if (LinkCreator::where('hash', $stTitle)->count() > 0) {
+			$this->generateString();
+		}
+		return $stTitle;
 	}
 }

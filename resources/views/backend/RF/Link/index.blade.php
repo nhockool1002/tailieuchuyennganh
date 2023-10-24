@@ -118,6 +118,11 @@
           { title: "Name", field: "name", editor: false },
           { title: "Origin", field: "origin", editor: false, formatter: "link" },
           { title: "Short Link", field: "short_link", editor: false, formatter: "link" },
+          { title: "Go Link", formatter:function(row){
+            return `<div'>
+                <a href="{{ env('APP_URL') . '/go/'}}${row.getData().hash ?? ''}">[GO]</a>
+              </div>`; 
+          }},
           { title: "Created By", field: "created_by", editor: false },
           { title: "Delete", formatter:function(row){
             return `<div class="deleteBtn" onClick="testClick(${row.getData().id})"'>
