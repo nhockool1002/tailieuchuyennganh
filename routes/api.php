@@ -17,6 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'middleware' => ['auth:api']], function () {
     Route::resource('pokemon', 'V1\PokemonController');
+    Route::group(['prefix' => 'link', 'as' => 'link.'], function() {
+        
+    });
 });

@@ -57,12 +57,22 @@
                     </a>
                 </li>
                 @endif
+                @if(Auth::user()->hasRole(['super-admin', 'admin']))
                 <li {{{ (Request::is('backend/links*') ? 'class=active' : '') }}}>
                     <a href="{{ route('link') }}">
                         <i class="ti-world"></i>
                         <p>Links Manager</p>
                     </a>
                 </li>
+                @endif
+                @if(Auth::user()->hasRole(['super-admin', 'admin']))
+                <li {{{ (Request::is('backend/link-creator/manage*') ? 'class=active' : '') }}}>
+                    <a href="{{ route('link_creator.manage') }}">
+                        <i class="ti-world"></i>
+                        <p>Links Creator</p>
+                    </a>
+                </li>
+                @endif
                 @if(Auth::user()->hasRole(['super-admin', 'admin']))
                 <li {{{ (Request::is('backend/ads*') ? 'class=active' : '') }}}>
                     <a href="{{ route('ads') }}">

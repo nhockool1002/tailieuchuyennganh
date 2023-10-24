@@ -254,6 +254,14 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:super-admin', 'check
     Route::group(['prefix' => 'filter', 'middleware' => 'role:super-admin'], function () {
         Route::get('administrator','UserController@filterAdmin')->name('filterAdmin');
     });
+
+    // Refactor Route
+    Route::group(['prefix' => 'link-creator', 'middleware' => 'role:super-admin', 'as' => 'link_creator.'], function() {
+        Route::get('manage', 'RF\LinkController@index')->name('manage');
+        Route::get('get', 'RF\LinkController@getAll')->name('getAllLink');
+        Route::post('create', 'RF\LinkController@createLink')->name('createLink');
+        Route::post('delete', 'RF\LinkController@deleteLink')->name('deleteLink');
+    });
 });
 
 Route::get('nganluong', function () {
