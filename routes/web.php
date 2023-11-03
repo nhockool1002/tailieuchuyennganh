@@ -25,7 +25,7 @@ Route::get('/logout', 'LoginController@getLogout')->name('getLogout');
 Route::group(['prefix' => '/', 'middleware' => ['checkunderconstruct']], function () {
     Route::get('', 'HomeController@getHome')->name('home');
     Route::prefix('/go')->group(function () {
-        Route::get('{string}', 'LinkController@getRedirect')->name('getRedirect');
+        Route::get('{string}', 'RF\LinkController@getRedirect')->name('getRedirect');
     });
     Route::group(['prefix' => 's3link', 'middleware' => 'checkunderconstruct'], function () {
         Route::get('/{slug}', 'S3ManageController@gotoS3Link')->name('gotoS3Link');
@@ -253,6 +253,14 @@ Route::group(['prefix' => 'backend', 'middleware' => ['role:super-admin', 'check
 
     Route::group(['prefix' => 'filter', 'middleware' => 'role:super-admin'], function () {
         Route::get('administrator','UserController@filterAdmin')->name('filterAdmin');
+    });
+
+    // Refactor Route
+    Route::group(['prefix' => 'link-creator', 'middleware' => 'role:super-admin', 'as' => 'link_creator.'], function() {
+        Route::get('manage', 'RF\LinkController@index')->name('manage');
+        Route::get('get', 'RF\LinkController@getAll')->name('getAllLink');
+        Route::post('create', 'RF\LinkController@createLink')->name('createLink');
+        Route::post('delete', 'RF\LinkController@deleteLink')->name('deleteLink');
     });
 });
 

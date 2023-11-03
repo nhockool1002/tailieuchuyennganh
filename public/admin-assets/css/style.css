@@ -228,3 +228,82 @@ button.btn.btn-romo.btn-warning.btn-fill.btn-xs {
     width: 400px;
     height: 30px;
 }
+
+.loading-wrap {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f7f7f7a7;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes ldio-4rdaneva26h {
+    0% { transform: scale(1.1500000000000001) }
+    100% { transform: scale(1) }
+}
+.ldio-4rdaneva26h div {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    top: 13.333333333333336px;
+    left: 13.333333333333336px;
+    background: #e15b64;
+    animation: ldio-4rdaneva26h 1s cubic-bezier(0,0.5,0.5,1) infinite;
+    animation-delay: -0.3s;
+}
+.ldio-4rdaneva26h div:nth-child(2) {
+    top: 13.333333333333336px;
+    left: 106.66666666666666px;
+    background: #f47e60;
+    animation-delay: -0.2s;
+}
+.ldio-4rdaneva26h div:nth-child(3) {
+    top: 106.66666666666666px;
+    left: 13.333333333333336px;
+    background: #abbd81;
+    animation-delay: 0s;
+}
+.ldio-4rdaneva26h div:nth-child(4) {
+    top: 106.66666666666666px;
+    left: 106.66666666666666px;
+    background: #f8b26a;
+    animation-delay: -0.1s;
+}
+.loadingio-spinner-cube-ybnfvzk6hrb {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    overflow: hidden;
+    background: #f7f7f7;
+}
+.ldio-4rdaneva26h {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+}
+.ldio-4rdaneva26h div { box-sizing: content-box; }
+
+.deleteBtn {
+    width: 70px;
+    background-color: #cd2d2d;
+    text-align: center;
+    color: white;
+    font-weight: lighter;
+    border-radius: 10px;
+    box-shadow: aquamarine 0px 0px 0px;
+    transition: .4s ease-in all;
+}
+
+.deleteBtn:hover {
+    margin-bottom: 10px;
+    box-shadow: aquamarine 5px 3px 2px;
+    background-color: #ff6403;
+}
