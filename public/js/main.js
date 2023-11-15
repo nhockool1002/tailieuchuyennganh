@@ -263,3 +263,11 @@ document.addEventListener("DOMContentLoaded", function() {
 			});
 	});
 });
+
+window.addEventListener('online', function() {
+	toastr.success('🌐 Trạng thái mạng trở lại bình thường!');
+})
+
+window.addEventListener('offline', function() {
+	toastr.warning('🌐 Tín hiệu mạng có vấn đề, vui lòng kiểm tra đường truyền!');
+})

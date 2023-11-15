@@ -28,3 +28,4 @@ Homestead.json
 
 /public/ckfinder/**
 /public/upload/
+.docker
